@@ -46,6 +46,20 @@ const experience = [
     summary:
       "Field services for government accounts. Built scripting tools reducing ticket resolution time.",
   },
+  {
+    role: "Shift Deskside Engineer",
+    org: "IBM - Thatz International",
+    period: "Feb 2010 — Feb 2012",
+    summary:
+      "Provided rotating-shift desktop support for SingHealth Outram clinical environments. Configured wireless network rollouts for DBS and compliance systems for MAS and LTA.",
+  },
+  {
+    role: "IT Engineer",
+    org: "IBM - Thatz International",
+    period: "Apr 2007 — Dec 2007",
+    summary:
+      "Provided onsite technical support for enterprise infrastructure projects, contributing to large-scale IT deployments and network upgrades across multiple sites.",
+  },
 ];
 
 export default function Skills() {
