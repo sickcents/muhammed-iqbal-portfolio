@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const projects = [
   {
     id: "auto-negotiator",
@@ -9,6 +11,8 @@ const projects = [
     goal: "Eliminate manual back-and-forth on routine procurement requests through autonomous agent decision-making.",
     metric: "Target: zero human touchpoints on standard negotiation cycles",
     highlight: true,
+    liveUrl: "https://negotiate.fightingwind.com",
+    image: "/screenshots/auto-negotiator.png",
   },
   {
     id: "procurement-classifier",
@@ -70,6 +74,8 @@ const projects = [
       "Demonstrate end-to-end creative AI application — from prompt design to physical printed output.",
     metric: "End-to-end from AI generation to printed output in under 30 seconds",
     highlight: false,
+    liveUrl: "https://photobooth.fightingwind.com",
+    image: "/screenshots/tourism-photobooth.png",
   },
 ];
 
@@ -83,10 +89,22 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
       }`}
     >
       {project.highlight && (
-        <div className="absolute -top-3 left-6">
+        <div className="absolute -top-3 left-6 z-10">
           <span className="bg-[#4CAF50] text-white text-xs font-semibold px-3 py-1 rounded-full">
             Featured
           </span>
+        </div>
+      )}
+
+      {project.image && (
+        <div className="relative z-0 -mx-7 -mt-7 mb-5 aspect-video overflow-hidden rounded-t-2xl border-b border-[#DDD8CC] bg-[#FAF8F4]">
+          <Image
+            src={project.image}
+            alt={`${project.title} screenshot`}
+            fill
+            sizes="(min-width: 768px) 50vw, 100vw"
+            className="object-cover object-top"
+          />
         </div>
       )}
 
@@ -94,31 +112,57 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
         <span className="text-xs font-semibold tracking-wider text-[#4CAF50] uppercase">
           {project.category}
         </span>
-        <span className="flex items-center gap-1.5 text-xs text-[#556B55] bg-[#FAF8F4] border border-[#DDD8CC] px-2.5 py-1 rounded-full">
-          <svg
-            width="10"
-            height="10"
-            viewBox="0 0 10 10"
-            fill="none"
-            className="text-[#556B55]"
+        {project.liveUrl ? (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-xs text-white bg-[#2D6A2D] hover:bg-[#245424] transition-colors px-2.5 py-1 rounded-full"
           >
-            <rect
-              x="1"
-              y="4"
-              width="8"
-              height="6"
-              rx="1"
-              stroke="currentColor"
-              strokeWidth="1.2"
-            />
-            <path
-              d="M3 4V3a2 2 0 0 1 4 0v1"
-              stroke="currentColor"
-              strokeWidth="1.2"
-            />
-          </svg>
-          Case study coming soon
-        </span>
+            <svg
+              width="10"
+              height="10"
+              viewBox="0 0 10 10"
+              fill="none"
+              className="text-white"
+            >
+              <path
+                d="M2 8L8 2M8 2H3.5M8 2V6.5"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            View live
+          </a>
+        ) : (
+          <span className="flex items-center gap-1.5 text-xs text-[#556B55] bg-[#FAF8F4] border border-[#DDD8CC] px-2.5 py-1 rounded-full">
+            <svg
+              width="10"
+              height="10"
+              viewBox="0 0 10 10"
+              fill="none"
+              className="text-[#556B55]"
+            >
+              <rect
+                x="1"
+                y="4"
+                width="8"
+                height="6"
+                rx="1"
+                stroke="currentColor"
+                strokeWidth="1.2"
+              />
+              <path
+                d="M3 4V3a2 2 0 0 1 4 0v1"
+                stroke="currentColor"
+                strokeWidth="1.2"
+              />
+            </svg>
+            Case study coming soon
+          </span>
+        )}
       </div>
 
       <h3 className="text-xl font-bold text-[#1A2E1A] mb-2 group-hover:text-[#2D6A2D] transition-colors">
