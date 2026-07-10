@@ -19,14 +19,14 @@ const techStack = [
 
 const experience = [
   {
-    role: "IT Support Engineer III (L5) — Technical Excellence, Applied AI/ML",
+    role: "IT Support Engineer III (L5)",
     org: "Amazon",
-    period: "Nov 2025 — 2026",
+    period: "Nov 2025 — Jul 2026",
     summary:
       "Designed and deployed AI-enabled internal tooling rolled out across APAC and ME. Cut change-management research from 1 hour to under 1 minute. Won Amazon Global Hackathon, Boston 2025.",
   },
   {
-    role: "IT Support Engineer II (L4) — Singapore Operations",
+    role: "IT Support Engineer II (L4)",
     org: "Amazon",
     period: "Oct 2020 — Oct 2025",
     summary:
@@ -52,6 +52,12 @@ const experience = [
     period: "Feb 2010 — Feb 2012",
     summary:
       "Provided rotating-shift desktop support for SingHealth Outram clinical environments. Configured wireless network rollouts for DBS and compliance systems for MAS and LTA.",
+  },
+  {
+    role: "National Service",
+    org: "",
+    period: "Jan 2008 — Jan 2010",
+    summary: "Full-time National Service, Singapore.",
   },
   {
     role: "IT Engineer",
@@ -105,7 +111,9 @@ export default function Skills() {
                 <div className="absolute left-3 top-2 w-2.5 h-2.5 rounded-full bg-[#2D6A2D] border-2 border-[#FAF8F4] ring-1 ring-[#2D6A2D]" />
                 <div className="flex flex-wrap items-baseline gap-2 mb-1">
                   <span className="font-semibold text-[#1A2E1A]">{job.role}</span>
-                  <span className="text-[#4CAF50] font-medium text-sm">@ {job.org}</span>
+                  {job.org && (
+                    <span className="text-[#4CAF50] font-medium text-sm">@ {job.org}</span>
+                  )}
                 </div>
                 <div className="text-xs text-[#556B55] mb-2 font-medium">{job.period}</div>
                 <p className="text-sm text-[#556B55] leading-relaxed">{job.summary}</p>
