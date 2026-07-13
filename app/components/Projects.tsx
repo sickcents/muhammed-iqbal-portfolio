@@ -27,8 +27,8 @@ const projects = [
     highlight: false,
   },
   {
-    id: "spatial-wayfinding",
-    title: "Spatial Wayfinding System",
+    id: "opensesame",
+    title: "OpenSesame",
     category: "Systems · 3D Web",
     tech: ["PDF Extraction", "SVG Processing", "Three.js", "Python", "Node"],
     description:
@@ -37,6 +37,22 @@ const projects = [
       "Give facility and operations teams live visibility into asset status without requiring on-site presence.",
     metric: "Operational visibility for global facility teams across multiple sites",
     highlight: false,
+    liveUrl: "https://opensesame.fightingwind.com",
+    image: "/screenshots/opensesame.png",
+  },
+  {
+    id: "buslari",
+    title: "Buslari",
+    category: "Web App · API",
+    tech: ["LTA API", "Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
+    description:
+      "Solari board-inspired transit dashboard integrating Singapore's Land Transport Authority (LTA) API for real-time bus arrival timings.",
+    goal:
+      "Build a beautiful, retro-styled solari display to show live bus arrival updates for public transit.",
+    metric: "Responsive Solari animations with live bus arrival updates",
+    highlight: false,
+    liveUrl: "https://buslari.fightingwind.com",
+    image: "/screenshots/buslari.png",
   },
   {
     id: "eucd-kiosks",
