@@ -23,8 +23,9 @@ export default function Hero() {
           </p>
 
           <p className="text-base text-[#556B55] mb-12 max-w-xl">
-            14 years from field IT to applied AI. I take ML pipelines and turn
-            them into tools people actually use.
+            19+ years from field IT to applied AI. I have taken manual tasks
+            into AI workflows and ML pipelines tools people actually use.
+            Creativity
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
@@ -47,8 +48,15 @@ export default function Hero() {
         <div className="mt-24 grid grid-cols-3 gap-8 max-w-lg border-t border-[#DDD8CC] pt-10">
           {[
             { value: "14+", label: "Years in engineering" },
-            { value: "100+", label: "Users on APAC tools" },
-            { value: "3", label: "Global hackathons" },
+            {
+              value: "100+",
+              label: "Users on tools, from local to global use",
+            },
+            {
+              value: "7+",
+              label:
+                "Physical Stakeholder Engagements, Summits, Hackathons. Worldwide.",
+            },
           ].map((stat) => (
             <div key={stat.label}>
               <div className="text-2xl font-bold text-[#2D6A2D]">
