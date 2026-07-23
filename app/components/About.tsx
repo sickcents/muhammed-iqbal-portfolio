@@ -16,7 +16,7 @@ export default function About() {
 
           <div className="md:col-span-8 space-y-5 text-[#556B55] text-lg leading-relaxed">
             <p>
-              I started in field IT support and spent 14 years working my way
+              I started in field IT support and spent 19+ years working my way
               through enterprise systems engineering, site launches, and fleet
               management.
             </p>
