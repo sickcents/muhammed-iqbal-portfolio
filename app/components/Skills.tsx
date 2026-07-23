@@ -109,7 +109,10 @@ export default function Skills() {
               {i < experience.length - 1 ? (
                 <div className="absolute left-4 top-[13px] bottom-[-45px] w-px bg-[#DDD8CC]" />
               ) : (
-                <div className="absolute left-4 top-[18px] w-px h-2 rounded-full bg-[#DDD8CC]" />
+                <>
+                  <div className="absolute left-4 top-[18px] w-px h-7 bg-[#DDD8CC]" />
+                  <div className="absolute left-[11px] top-[44px] w-2.5 h-px bg-[#DDD8CC]" />
+                </>
               )}
               <div className="absolute left-3 top-2 w-2.5 h-2.5 rounded-full bg-[#2D6A2D] border-2 border-[#FAF8F4] ring-1 ring-[#2D6A2D]" />
               <div className="flex flex-wrap items-baseline gap-2 mb-1">
