@@ -518,13 +518,20 @@ function ProjectModal({
   const details = projectDetailsRegistry[project.id];
 
   useEffect(() => {
+    // `scrollbar-gutter: stable` (globals.css) only reserves space for the
+    // auto/scroll case — overflow: hidden drops the gutter reservation
+    // entirely per spec, so the removed scrollbar's width is compensated
+    // here directly to prevent the page from shifting horizontally.
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.overflow = "hidden";
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [onClose]);
