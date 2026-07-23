@@ -103,23 +103,25 @@ export default function Skills() {
         </div>
 
         <h3 className="text-xl font-bold text-[#1A2E1A] mb-8">Career arc</h3>
-        <div className="relative">
-          <div className="absolute left-4 top-0 bottom-0 w-px bg-[#DDD8CC]" />
-          <div className="space-y-8">
-            {experience.map((job, i) => (
-              <div key={i} className="pl-12 relative">
-                <div className="absolute left-3 top-2 w-2.5 h-2.5 rounded-full bg-[#2D6A2D] border-2 border-[#FAF8F4] ring-1 ring-[#2D6A2D]" />
-                <div className="flex flex-wrap items-baseline gap-2 mb-1">
-                  <span className="font-semibold text-[#1A2E1A]">{job.role}</span>
-                  {job.org && (
-                    <span className="text-[#4CAF50] font-medium text-sm">@ {job.org}</span>
-                  )}
-                </div>
-                <div className="text-xs text-[#556B55] mb-2 font-medium">{job.period}</div>
-                <p className="text-sm text-[#556B55] leading-relaxed">{job.summary}</p>
+        <div className="space-y-8">
+          {experience.map((job, i) => (
+            <div key={i} className="pl-12 relative">
+              {i < experience.length - 1 ? (
+                <div className="absolute left-4 top-[13px] bottom-[-45px] w-px bg-[#DDD8CC]" />
+              ) : (
+                <div className="absolute left-4 top-[18px] w-px h-2 rounded-full bg-[#DDD8CC]" />
+              )}
+              <div className="absolute left-3 top-2 w-2.5 h-2.5 rounded-full bg-[#2D6A2D] border-2 border-[#FAF8F4] ring-1 ring-[#2D6A2D]" />
+              <div className="flex flex-wrap items-baseline gap-2 mb-1">
+                <span className="font-semibold text-[#1A2E1A]">{job.role}</span>
+                {job.org && (
+                  <span className="text-[#4CAF50] font-medium text-sm">@ {job.org}</span>
+                )}
               </div>
-            ))}
-          </div>
+              <div className="text-xs text-[#556B55] mb-2 font-medium">{job.period}</div>
+              <p className="text-sm text-[#556B55] leading-relaxed">{job.summary}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
