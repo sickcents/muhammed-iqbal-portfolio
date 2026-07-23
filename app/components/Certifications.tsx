@@ -46,6 +46,14 @@ const certs = [
   },
 ];
 
+const otherCerts = [
+  { name: "Exam 744: Securing Windows Server 2016", badgeImage: "/badges/exam-744.png" },
+  { name: "MTA: Security Fundamentals", badgeImage: "/badges/mta-security-fundamentals.png" },
+  { name: "Exam 412: Configuring Advanced Windows Server 2012 Services", badgeImage: "/badges/exam-412.png" },
+  { name: "Exam 411: Administering Windows Server 2012", badgeImage: "/badges/exam-411.png" },
+  { name: "Exam 410: Installing and Configuring Windows Server 2012", badgeImage: "/badges/exam-410.png" },
+];
+
 const training = [
   "Amazon Machine Learning University (MLU) — Applied AI/ML, 2025–2026",
   "Microsoft Azure Administrator, 2020",
@@ -118,6 +126,34 @@ export default function Certifications() {
             </div>
           ))}
         </div>
+
+        <a
+          href="https://www.credly.com/users/muhammed-iqbal-bin-abdul-rahman/badges/credly"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-3 mb-12 group w-fit"
+        >
+          <div className="flex -space-x-3">
+            {otherCerts.map((cert) => (
+              <div
+                key={cert.name}
+                title={cert.name}
+                className="w-9 h-9 rounded-full bg-[#FAF8F4] border-2 border-white ring-1 ring-[#DDD8CC] overflow-hidden shrink-0"
+              >
+                <Image
+                  src={cert.badgeImage}
+                  alt={cert.name}
+                  width={36}
+                  height={36}
+                  className="object-cover w-full h-full"
+                />
+              </div>
+            ))}
+          </div>
+          <span className="text-sm font-medium text-[#556B55] group-hover:text-[#2D6A2D] transition-colors">
+            +{otherCerts.length} other certifications ↗
+          </span>
+        </a>
 
         <div>
           <h3 className="text-sm font-semibold text-[#1A2E1A] mb-4">Training</h3>
