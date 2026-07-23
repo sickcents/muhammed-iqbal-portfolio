@@ -4,7 +4,7 @@ export default function About() {
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
           <div className="md:col-span-4">
-            <span className="text-xs font-semibold tracking-widest text-[#4CAF50] uppercase">
+            <span className="text-xs font-semibold tracking-widest text-[#14B8A6] uppercase">
               About
             </span>
             <h2 className="text-3xl font-bold text-[#1A2E1A] mt-3 leading-tight">

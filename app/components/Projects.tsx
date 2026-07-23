@@ -173,7 +173,7 @@ const projectDetailsRegistry: Record<string, ProjectDetail> = {
           "The `openai` SDK is pointed at Gemini's own OpenAI-compatible endpoint rather than a Google-native SDK, and every turn is forced through a {\"thought\", \"tool_call\"} JSON envelope regardless of provider — one retry on schema failure, then a visible error, never a silent hang.",
         contribution:
           "Keeps the Agent Console's reasoning trace identical no matter which LLM Engine is configured, and means the live demo can never lock up on an infinite retry loop.",
-        icon: <Sparkles className="w-5 h-5 text-[#2D6A2D]" />,
+        icon: <Sparkles className="w-5 h-5 text-[#0F8A72]" />,
       },
       {
         title: "Haversine Donor Ranking Over Real MRT Coordinates",
@@ -181,7 +181,7 @@ const projectDetailsRegistry: Record<string, ProjectDetail> = {
           "Every ClickShop site is pinned to a real Eastern Singapore MRT station's lat/long; the same haversine distance calc backs the donor-ranking query, the courier ETA narration, and the Leaflet map — one source of truth instead of a cosmetic map plus a hand-assigned distance tier.",
         contribution:
           "Lets donor selection, dispatch ETAs, and the map view all agree with each other by construction, since they read the same coordinates.",
-        icon: <Layers className="w-5 h-5 text-[#2D6A2D]" />,
+        icon: <Layers className="w-5 h-5 text-[#0F8A72]" />,
       },
       {
         title: "Mocked Toolbelt, Genuinely Live Reasoning",
@@ -189,7 +189,7 @@ const projectDetailsRegistry: Record<string, ProjectDetail> = {
           "Email/Calendar/Logistics/ZPL/ITSM are in-process mocks backed by Neon Postgres — no real Gmail OAuth or courier API — but the LLM calls behind every drafted email and decision are real, live inference against current DB state, never a scripted walkthrough.",
         contribution:
           "Avoids OAuth/secrets surface area in a public repo while keeping the one thing worth proving — the agent's actual reasoning — completely un-staged.",
-        icon: <Database className="w-5 h-5 text-[#2D6A2D]" />,
+        icon: <Database className="w-5 h-5 text-[#0F8A72]" />,
       },
     ],
     designChoices: [
@@ -275,7 +275,7 @@ const projectDetailsRegistry: Record<string, ProjectDetail> = {
           "The Poem Receipt mode feeds an emoji theme picker, the destination city, and live Open-Meteo weather for that city into one prompt; Gemini returns a haiku (5-7-5, ~50% of sessions) or a short free-verse poem.",
         contribution:
           "Makes every printed receipt genuinely different per session instead of a templated fill-in-the-blank, while staying fast enough for a walk-up kiosk.",
-        icon: <Sparkles className="w-5 h-5 text-[#2D6A2D]" />,
+        icon: <Sparkles className="w-5 h-5 text-[#0F8A72]" />,
       },
       {
         title: "Satori — Boarding Pass Rendering Without a Browser",
@@ -283,7 +283,7 @@ const projectDetailsRegistry: Record<string, ProjectDetail> = {
           "The shared Boarding Pass artifact (flight number, route, seat, gate, QR code, Code 128 barcode) is rendered server-side as HTML/CSS via Satori + resvg straight to a PNG — no headless browser at request time.",
         contribution:
           "Keeps boarding-pass generation fast and stateless on serverless functions, since spinning up a real browser per request would be far too slow for a live kiosk queue.",
-        icon: <Terminal className="w-5 h-5 text-[#2D6A2D]" />,
+        icon: <Terminal className="w-5 h-5 text-[#0F8A72]" />,
       },
       {
         title: "Cloudinary + Upstash Redis Session Pipeline",
@@ -291,7 +291,7 @@ const projectDetailsRegistry: Record<string, ProjectDetail> = {
           "All four modes' media (strip PNGs, 15s/10s videos, GIFs) go through Cloudinary; session state and a 7-day TTL live in Upstash Redis, so a daily cron purges both in lockstep once a session expires.",
         contribution:
           "One storage/session backbone serves four very different capture types — photos, canvas video, webcam video, generated poem — without mode-specific plumbing.",
-        icon: <Database className="w-5 h-5 text-[#2D6A2D]" />,
+        icon: <Database className="w-5 h-5 text-[#0F8A72]" />,
       },
     ],
     designChoices: [
@@ -374,7 +374,7 @@ const projectDetailsRegistry: Record<string, ProjectDetail> = {
           "Polls Singapore's LTA DataMall Bus Arrival (v3) and BusStops endpoints per configured stop, proxied server-side so the API key never reaches the browser.",
         contribution:
           "Feeds real-time arrival minutes into the board, with automatic stop-name lookup so adding a new bus stop code renders correctly without manual entry.",
-        icon: <Database className="w-5 h-5 text-[#2D6A2D]" />,
+        icon: <Database className="w-5 h-5 text-[#0F8A72]" />,
       },
       {
         title: "Adaptive Arrival Cache",
@@ -382,7 +382,7 @@ const projectDetailsRegistry: Record<string, ProjectDetail> = {
           "A per-stop in-memory cache whose TTL shrinks as the soonest bus gets closer — 20s when a bus is imminent, up to 2 minutes when nothing is due soon.",
         contribution:
           "Keeps the board accurate as buses approach while staying well under LTA's rate limits — accuracy where it matters, patience where it doesn't.",
-        icon: <Terminal className="w-5 h-5 text-[#2D6A2D]" />,
+        icon: <Terminal className="w-5 h-5 text-[#0F8A72]" />,
       },
       {
         title: "Telegram Bot + NextAuth/Drizzle/Neon",
@@ -390,7 +390,7 @@ const projectDetailsRegistry: Record<string, ProjectDetail> = {
           "A linked Telegram bot posts straight into a board's Messages panel; NextAuth (Google/GitHub) plus Drizzle ORM on Neon Postgres gives every signed-in user their own persisted board.",
         contribution:
           "Turns the board into a two-way personal message board you can update from your phone, without ever touching the admin panel.",
-        icon: <Mail className="w-5 h-5 text-[#2D6A2D]" />,
+        icon: <Mail className="w-5 h-5 text-[#0F8A72]" />,
       },
     ],
     designChoices: [
@@ -479,13 +479,13 @@ function ProjectCard({
     <div
       onClick={onClick}
       className={`relative bg-white rounded-2xl p-7 border transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 cursor-pointer group flex flex-col justify-between h-full ${
-        project.highlight ? "border-[#2D6A2D] shadow-sm" : "border-[#DDD8CC]"
+        project.highlight ? "border-[#0F8A72] shadow-sm" : "border-[#DDD8CC]"
       }`}
     >
       <div>
         {project.highlight && (
           <div className="absolute -top-3 left-6 z-10">
-            <span className="bg-[#4CAF50] text-white text-xs font-semibold px-3 py-1 rounded-full">
+            <span className="bg-[#14B8A6] text-white text-xs font-semibold px-3 py-1 rounded-full">
               Featured
             </span>
           </div>
@@ -504,7 +504,7 @@ function ProjectCard({
         )}
 
         <div className="flex items-start justify-between mb-4">
-          <span className="text-xs font-semibold tracking-wider text-[#4CAF50] uppercase">
+          <span className="text-xs font-semibold tracking-wider text-[#14B8A6] uppercase">
             {project.category}
           </span>
           {project.liveUrl ? (
@@ -513,7 +513,7 @@ function ProjectCard({
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="flex items-center gap-1.5 text-xs text-white bg-[#2D6A2D] hover:bg-[#245424] transition-colors px-2.5 py-1 rounded-full"
+              className="flex items-center gap-1.5 text-xs text-white bg-[#0F8A72] hover:bg-[#0B6B58] transition-colors px-2.5 py-1 rounded-full"
             >
               <svg
                 width="10"
@@ -561,7 +561,7 @@ function ProjectCard({
           )}
         </div>
 
-        <h3 className="text-xl font-bold text-[#1A2E1A] mb-2 group-hover:text-[#2D6A2D] transition-colors">
+        <h3 className="text-xl font-bold text-[#1A2E1A] mb-2 group-hover:text-[#0F8A72] transition-colors">
           {project.title}
         </h3>
 
@@ -577,7 +577,7 @@ function ProjectCard({
 
       <div>
         <div className="bg-[#FAF8F4] rounded-xl px-4 py-3 mb-5 border border-[#DDD8CC]">
-          <p className="text-xs text-[#2D6A2D] font-semibold leading-relaxed">
+          <p className="text-xs text-[#0F8A72] font-semibold leading-relaxed">
             {project.metric}
           </p>
         </div>
@@ -648,7 +648,7 @@ function ProjectModal({
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-[#DDD8CC] bg-white">
           <div>
-            <span className="text-xs font-semibold tracking-wider text-[#4CAF50] uppercase">
+            <span className="text-xs font-semibold tracking-wider text-[#14B8A6] uppercase">
               {project.category}
             </span>
             <h2 className="text-xl md:text-2xl font-bold text-[#1A2E1A]">
@@ -681,18 +681,18 @@ function ProjectModal({
           {/* Quick Stats Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-white p-5 rounded-xl border border-[#DDD8CC]">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-[#2D6A2D] mb-1.5 flex items-center gap-1.5">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-[#0F8A72] mb-1.5 flex items-center gap-1.5">
                 <Cpu className="w-4 h-4" /> Project Goal
               </h3>
               <p className="text-sm text-[#556B55] leading-relaxed">
                 {project.goal}
               </p>
             </div>
-            <div className="bg-white p-5 rounded-xl border border-[#2D6A2D]/30 bg-[#FAFBF9]">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-[#2D6A2D] mb-1.5 flex items-center gap-1.5">
+            <div className="bg-white p-5 rounded-xl border border-[#0F8A72]/30 bg-[#F5FBFA]">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-[#0F8A72] mb-1.5 flex items-center gap-1.5">
                 <Layers className="w-4 h-4" /> Impact & Metric
               </h3>
-              <p className="text-sm text-[#2D6A2D] font-medium leading-relaxed">
+              <p className="text-sm text-[#0F8A72] font-medium leading-relaxed">
                 {project.metric}
               </p>
             </div>
@@ -703,7 +703,7 @@ function ProjectModal({
               {/* Architecture Diagram */}
               <div className="bg-white border border-[#DDD8CC] rounded-xl p-5 md:p-6 shadow-sm">
                 <h3 className="text-sm font-semibold text-[#1A2E1A] mb-5 flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#4CAF50]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#E2672A]" />
                   System Architecture & Data Flow
                 </h3>
 
@@ -712,7 +712,7 @@ function ProjectModal({
                     <div className="flex items-center justify-between text-center relative z-10">
                       {/* Guest Capture */}
                       <div className="w-[140px] flex flex-col items-center">
-                        <div className="w-12 h-12 rounded-full bg-[#E0EBE0] border border-[#2D6A2D] flex items-center justify-center text-[#2D6A2D] font-bold mb-2">
+                        <div className="w-12 h-12 rounded-full bg-[#D7F0EA] border border-[#0F8A72] flex items-center justify-center text-[#0F8A72] font-bold mb-2">
                           1
                         </div>
                         <span className="text-xs font-bold text-[#1A2E1A]">
@@ -735,7 +735,7 @@ function ProjectModal({
 
                       {/* Next.js API Routes */}
                       <div className="w-[150px] flex flex-col items-center">
-                        <div className="w-12 h-12 rounded-full bg-[#E0EBE0] border border-[#2D6A2D] flex items-center justify-center text-[#2D6A2D] font-bold mb-2">
+                        <div className="w-12 h-12 rounded-full bg-[#D7F0EA] border border-[#0F8A72] flex items-center justify-center text-[#0F8A72] font-bold mb-2">
                           2
                         </div>
                         <span className="text-xs font-bold text-[#1A2E1A]">
@@ -758,7 +758,7 @@ function ProjectModal({
 
                       {/* Outputs */}
                       <div className="w-[140px] flex flex-col items-center">
-                        <div className="w-12 h-12 rounded-full bg-[#E0EBE0] border border-[#2D6A2D] flex items-center justify-center text-[#2D6A2D] font-bold mb-2">
+                        <div className="w-12 h-12 rounded-full bg-[#D7F0EA] border border-[#0F8A72] flex items-center justify-center text-[#0F8A72] font-bold mb-2">
                           3
                         </div>
                         <span className="text-xs font-bold text-[#1A2E1A]">
@@ -805,7 +805,7 @@ function ProjectModal({
                     <div className="flex items-center justify-between text-center relative z-10">
                       {/* Receiver Site */}
                       <div className="w-[140px] flex flex-col items-center">
-                        <div className="w-12 h-12 rounded-full bg-[#E0EBE0] border border-[#2D6A2D] flex items-center justify-center text-[#2D6A2D] font-bold mb-2">
+                        <div className="w-12 h-12 rounded-full bg-[#D7F0EA] border border-[#0F8A72] flex items-center justify-center text-[#0F8A72] font-bold mb-2">
                           1
                         </div>
                         <span className="text-xs font-bold text-[#1A2E1A]">
@@ -828,7 +828,7 @@ function ProjectModal({
 
                       {/* AI Agent Loop */}
                       <div className="w-[150px] flex flex-col items-center">
-                        <div className="w-12 h-12 rounded-full bg-[#E0EBE0] border border-[#2D6A2D] flex items-center justify-center text-[#2D6A2D] font-bold mb-2">
+                        <div className="w-12 h-12 rounded-full bg-[#D7F0EA] border border-[#0F8A72] flex items-center justify-center text-[#0F8A72] font-bold mb-2">
                           2
                         </div>
                         <span className="text-xs font-bold text-[#1A2E1A]">
@@ -851,7 +851,7 @@ function ProjectModal({
 
                       {/* Transfer Outcome */}
                       <div className="w-[140px] flex flex-col items-center">
-                        <div className="w-12 h-12 rounded-full bg-[#E0EBE0] border border-[#2D6A2D] flex items-center justify-center text-[#2D6A2D] font-bold mb-2">
+                        <div className="w-12 h-12 rounded-full bg-[#D7F0EA] border border-[#0F8A72] flex items-center justify-center text-[#0F8A72] font-bold mb-2">
                           3
                         </div>
                         <span className="text-xs font-bold text-[#1A2E1A]">
@@ -896,7 +896,7 @@ function ProjectModal({
                     <div className="flex items-center justify-between text-center relative z-10">
                       {/* Kiosk Display */}
                       <div className="w-[140px] flex flex-col items-center">
-                        <div className="w-12 h-12 rounded-full bg-[#E0EBE0] border border-[#2D6A2D] flex items-center justify-center text-[#2D6A2D] font-bold mb-2">
+                        <div className="w-12 h-12 rounded-full bg-[#D7F0EA] border border-[#0F8A72] flex items-center justify-center text-[#0F8A72] font-bold mb-2">
                           1
                         </div>
                         <span className="text-xs font-bold text-[#1A2E1A]">
@@ -919,7 +919,7 @@ function ProjectModal({
 
                       {/* Next.js Server */}
                       <div className="w-[150px] flex flex-col items-center">
-                        <div className="w-12 h-12 rounded-full bg-[#E0EBE0] border border-[#2D6A2D] flex items-center justify-center text-[#2D6A2D] font-bold mb-2">
+                        <div className="w-12 h-12 rounded-full bg-[#D7F0EA] border border-[#0F8A72] flex items-center justify-center text-[#0F8A72] font-bold mb-2">
                           2
                         </div>
                         <span className="text-xs font-bold text-[#1A2E1A]">
@@ -942,7 +942,7 @@ function ProjectModal({
 
                       {/* External Services */}
                       <div className="w-[140px] flex flex-col items-center">
-                        <div className="w-12 h-12 rounded-full bg-[#E0EBE0] border border-[#2D6A2D] flex items-center justify-center text-[#2D6A2D] font-bold mb-2">
+                        <div className="w-12 h-12 rounded-full bg-[#D7F0EA] border border-[#0F8A72] flex items-center justify-center text-[#0F8A72] font-bold mb-2">
                           3
                         </div>
                         <span className="text-xs font-bold text-[#1A2E1A]">
@@ -990,7 +990,7 @@ function ProjectModal({
               {/* Use of Multimodal Generative AI */}
               <div className="space-y-4">
                 <h3 className="text-sm font-semibold text-[#1A2E1A] flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#4CAF50]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#E2672A]" />
                   {details.highlightedToolsLabel ||
                     "Use of Multimodal Generative AI"}
                 </h3>
@@ -1011,7 +1011,7 @@ function ProjectModal({
                           {tool.description}
                         </p>
                       </div>
-                      <div className="border-t border-[#EAE6DB] pt-3 text-[11px] text-[#2D6A2D]">
+                      <div className="border-t border-[#EAE6DB] pt-3 text-[11px] text-[#0F8A72]">
                         <span className="font-semibold block uppercase tracking-wider text-[9px] mb-1">
                           Contribution:
                         </span>
@@ -1032,7 +1032,7 @@ function ProjectModal({
                   {details.kioskHardware ? (
                     <div className="bg-white border border-[#DDD8CC] rounded-xl p-5">
                       <h3 className="text-sm font-semibold text-[#1A2E1A] mb-4 flex items-center gap-1.5">
-                        <Printer className="w-4 h-4 text-[#2D6A2D]" />
+                        <Printer className="w-4 h-4 text-[#0F8A72]" />
                         Physical Kiosk Integration
                       </h3>
                       <ul className="space-y-2.5">
@@ -1041,7 +1041,7 @@ function ProjectModal({
                             key={idx}
                             className="text-xs text-[#556B55] flex items-start gap-2"
                           >
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#4CAF50] mt-1.5 shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#E2672A] mt-1.5 shrink-0" />
                             <span>{item}</span>
                           </li>
                         ))}
@@ -1050,7 +1050,7 @@ function ProjectModal({
                   ) : details.agentCapabilities ? (
                     <div className="bg-white border border-[#DDD8CC] rounded-xl p-5">
                       <h3 className="text-sm font-semibold text-[#1A2E1A] mb-4 flex items-center gap-1.5">
-                        <Terminal className="w-4 h-4 text-[#2D6A2D]" />
+                        <Terminal className="w-4 h-4 text-[#0F8A72]" />
                         {details.agentCapabilitiesLabel ||
                           "Agent Tool Integration & APIs"}
                       </h3>
@@ -1060,7 +1060,7 @@ function ProjectModal({
                             key={idx}
                             className="text-xs text-[#556B55] flex items-start gap-2"
                           >
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#4CAF50] mt-1.5 shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#E2672A] mt-1.5 shrink-0" />
                             <span>{item}</span>
                           </li>
                         ))}
@@ -1073,7 +1073,7 @@ function ProjectModal({
                     <div className="bg-white border border-[#DDD8CC] rounded-xl p-5 space-y-4">
                       <div>
                         <h3 className="text-sm font-semibold text-[#1A2E1A] mb-2 flex items-center gap-1.5">
-                          <Mail className="w-4 h-4 text-[#2D6A2D]" />
+                          <Mail className="w-4 h-4 text-[#0F8A72]" />
                           Processing & Delivery
                         </h3>
                         <p className="text-xs text-[#556B55] leading-relaxed">
@@ -1096,7 +1096,7 @@ function ProjectModal({
                     <div className="bg-white border border-[#DDD8CC] rounded-xl p-5 space-y-4">
                       <div>
                         <h3 className="text-sm font-semibold text-[#1A2E1A] mb-2 flex items-center gap-1.5">
-                          <Mail className="w-4 h-4 text-[#2D6A2D]" />
+                          <Mail className="w-4 h-4 text-[#0F8A72]" />
                           {details.systemIntegrations.label ||
                             "Automated Verification & Proofs"}
                         </h3>
@@ -1127,7 +1127,7 @@ function ProjectModal({
               {/* Key Design Understandings */}
               <div className="space-y-4">
                 <h3 className="text-sm font-semibold text-[#1A2E1A] flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#4CAF50]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#E2672A]" />
                   Key Design Understandings & Choices
                 </h3>
                 <div className="border border-[#DDD8CC] rounded-xl overflow-hidden bg-white">
@@ -1162,7 +1162,7 @@ function ProjectModal({
               {/* Screenshots & Interactive Gallery */}
               <div className="space-y-4">
                 <h3 className="text-sm font-semibold text-[#1A2E1A] flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#4CAF50]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#E2672A]" />
                   Project Screenshots & Key Interactions
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1195,12 +1195,12 @@ function ProjectModal({
               {/* Technology Stack Grid */}
               <div className="bg-white border border-[#DDD8CC] rounded-xl p-5 md:p-6 shadow-sm">
                 <h3 className="text-sm font-semibold text-[#1A2E1A] mb-4 flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#4CAF50]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#E2672A]" />
                   Technology Stack
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-left">
                   <div className="p-3 bg-[#FAF8F4] border border-[#DDD8CC] rounded-lg">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#2D6A2D] block mb-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#0F8A72] block mb-1">
                       Languages
                     </span>
                     <div className="flex flex-wrap gap-1 text-[11px] text-[#556B55]">
@@ -1209,7 +1209,7 @@ function ProjectModal({
                     </div>
                   </div>
                   <div className="p-3 bg-[#FAF8F4] border border-[#DDD8CC] rounded-lg">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#2D6A2D] block mb-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#0F8A72] block mb-1">
                       Frontend & Hosting
                     </span>
                     <div className="flex flex-wrap gap-1 text-[11px] text-[#556B55]">
@@ -1218,7 +1218,7 @@ function ProjectModal({
                     </div>
                   </div>
                   <div className="p-3 bg-[#FAF8F4] border border-[#DDD8CC] rounded-lg">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#2D6A2D] block mb-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#0F8A72] block mb-1">
                       Databases & Infrastructure
                     </span>
                     <div className="flex flex-wrap gap-1 text-[11px] text-[#556B55]">
@@ -1227,7 +1227,7 @@ function ProjectModal({
                     </div>
                   </div>
                   <div className="p-3 bg-[#FAF8F4] border border-[#DDD8CC] rounded-lg">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#2D6A2D] block mb-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#0F8A72] block mb-1">
                       {details.techStack?.aiOrSystemsLabel || "Generative AI"}
                     </span>
                     <div className="flex flex-wrap gap-1 text-[11px] text-[#556B55]">
@@ -1266,7 +1266,7 @@ function ProjectModal({
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs text-white bg-[#2D6A2D] hover:bg-[#245424] transition-colors px-4 py-2 rounded-full font-medium"
+              className="flex items-center gap-1.5 text-xs text-white bg-[#0F8A72] hover:bg-[#0B6B58] transition-colors px-4 py-2 rounded-full font-medium"
             >
               View Live Demo <ExternalLink className="w-3.5 h-3.5" />
             </a>
@@ -1286,7 +1286,7 @@ export default function Projects() {
     <section id="projects" className="py-24 px-6 border-t border-[#DDD8CC]">
       <div className="max-w-5xl mx-auto">
         <div className="mb-14">
-          <span className="text-xs font-semibold tracking-widest text-[#4CAF50] uppercase">
+          <span className="text-xs font-semibold tracking-widest text-[#14B8A6] uppercase">
             Projects
           </span>
           <h2 className="text-3xl font-bold text-[#1A2E1A] mt-3">

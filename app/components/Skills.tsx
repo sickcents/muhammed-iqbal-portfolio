@@ -72,7 +72,7 @@ export default function Skills() {
   return (
     <section id="skills" className="py-24 px-6 border-t border-[#DDD8CC]">
       <div className="max-w-5xl mx-auto">
-        <span className="text-xs font-semibold tracking-widest text-[#4CAF50] uppercase">
+        <span className="text-xs font-semibold tracking-widest text-[#14B8A6] uppercase">
           Stack & Experience
         </span>
         <h2 className="text-3xl font-bold text-[#1A2E1A] mt-3 mb-14">
@@ -85,7 +85,7 @@ export default function Skills() {
               key={group.category}
               className="bg-white border border-[#DDD8CC] rounded-2xl p-6"
             >
-              <h3 className="text-xs font-semibold tracking-wider text-[#4CAF50] uppercase mb-4">
+              <h3 className="text-xs font-semibold tracking-wider text-[#14B8A6] uppercase mb-4">
                 {group.category}
               </h3>
               <div className="flex flex-wrap gap-2">
@@ -114,11 +114,11 @@ export default function Skills() {
                   <div className="absolute left-3 top-[36px] w-2.5 h-px bg-[#DDD8CC]" />
                 </>
               )}
-              <div className="absolute left-3 top-2 w-2.5 h-2.5 rounded-full bg-[#2D6A2D] border-2 border-[#FAF8F4] ring-1 ring-[#2D6A2D]" />
+              <div className="absolute left-3 top-2 w-2.5 h-2.5 rounded-full bg-[#0F8A72] border-2 border-[#FAF8F4] ring-1 ring-[#0F8A72]" />
               <div className="flex flex-wrap items-baseline gap-2 mb-1">
                 <span className="font-semibold text-[#1A2E1A]">{job.role}</span>
                 {job.org && (
-                  <span className="text-[#4CAF50] font-medium text-sm">@ {job.org}</span>
+                  <span className="text-[#14B8A6] font-medium text-sm">@ {job.org}</span>
                 )}
               </div>
               <div className="text-xs text-[#556B55] mb-2 font-medium">{job.period}</div>

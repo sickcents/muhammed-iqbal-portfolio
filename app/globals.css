@@ -3,11 +3,13 @@
 @theme inline {
   --color-cream: #FAF8F4;
   --color-cream-dark: #F0EBE1;
-  --color-forest: #2D6A2D;
-  --color-forest-dark: #1E4D1E;
-  --color-forest-light: #3D8B3D;
-  --color-green-bright: #4CAF50;
-  --color-green-signal: #38A169;
+  --color-forest: #0F8A72;
+  --color-forest-dark: #0B6B58;
+  --color-forest-light: #22B394;
+  --color-green-bright: #14B8A6;
+  --color-green-signal: #0D9488;
+  --color-orange: #E2672A;
+  --color-orange-dark: #B8501C;
   --color-ink: #1A2E1A;
   --color-ink-muted: #556B55;
   --color-border: #DDD8CC;
@@ -31,7 +33,7 @@ body {
 }
 
 ::selection {
-  background-color: #4CAF50;
+  background-color: #14B8A6;
   color: #FFFFFF;
 }
 

@@ -30,7 +30,7 @@ export default function Nav() {
       <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
         <a
           href="#"
-          className="font-semibold text-[#1A2E1A] tracking-tight hover:text-[#2D6A2D] transition-colors shrink-0"
+          className="font-semibold text-[#1A2E1A] tracking-tight hover:text-[#0F8A72] transition-colors shrink-0"
         >
           MI
         </a>
@@ -40,14 +40,14 @@ export default function Nav() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-[#556B55] hover:text-[#2D6A2D] transition-colors font-medium"
+              className="text-sm text-[#556B55] hover:text-[#0F8A72] transition-colors font-medium"
             >
               {link.label}
             </a>
           ))}
           <a
             href="#contact"
-            className="text-sm bg-[#2D6A2D] text-white px-4 py-2 rounded-full hover:bg-[#1E4D1E] transition-colors font-medium whitespace-nowrap shrink-0"
+            className="text-sm bg-[#0F8A72] text-white px-4 py-2 rounded-full hover:bg-[#0B6B58] transition-colors font-medium whitespace-nowrap shrink-0"
           >
             Get in touch
           </a>
@@ -56,7 +56,7 @@ export default function Nav() {
         <div className="flex md:hidden items-center gap-3">
           <a
             href="#contact"
-            className="text-sm bg-[#2D6A2D] text-white px-4 py-2 rounded-full hover:bg-[#1E4D1E] transition-colors font-medium whitespace-nowrap shrink-0"
+            className="text-sm bg-[#0F8A72] text-white px-4 py-2 rounded-full hover:bg-[#0B6B58] transition-colors font-medium whitespace-nowrap shrink-0"
           >
             Get in touch
           </a>
@@ -65,7 +65,7 @@ export default function Nav() {
             onClick={() => setMenuOpen((open) => !open)}
             aria-expanded={menuOpen}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
-            className="shrink-0 w-9 h-9 flex items-center justify-center rounded-full border border-[#DDD8CC] text-[#1A2E1A] hover:border-[#2D6A2D] hover:text-[#2D6A2D] transition-colors"
+            className="shrink-0 w-9 h-9 flex items-center justify-center rounded-full border border-[#DDD8CC] text-[#1A2E1A] hover:border-[#0F8A72] hover:text-[#0F8A72] transition-colors"
           >
             <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
             <svg
@@ -102,7 +102,7 @@ export default function Nav() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className="text-sm text-[#556B55] hover:text-[#2D6A2D] transition-colors font-medium"
+                className="text-sm text-[#556B55] hover:text-[#0F8A72] transition-colors font-medium"
               >
                 {link.label}
               </a>

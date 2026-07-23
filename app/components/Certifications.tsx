@@ -65,7 +65,7 @@ export default function Certifications() {
       <div className="max-w-5xl mx-auto">
         <div className="flex items-end justify-between flex-wrap gap-3 mb-14">
           <div>
-            <span className="text-xs font-semibold tracking-widest text-[#4CAF50] uppercase">
+            <span className="text-xs font-semibold tracking-widest text-[#14B8A6] uppercase">
               Credentials
             </span>
             <h2 className="text-3xl font-bold text-[#1A2E1A] mt-3">
@@ -76,9 +76,9 @@ export default function Certifications() {
             href="https://www.credly.com/users/muhammed-iqbal-bin-abdul-rahman/badges/credly"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-medium text-[#2D6A2D] hover:text-[#1E4D1E] underline underline-offset-4"
+            className="text-sm font-medium text-[#0F8A72] hover:text-[#0B6B58] underline underline-offset-4"
           >
-            View verified badges on Credly ↗
+            View verified badges on Credly <span className="text-[#E2672A]">↗</span>
           </a>
         </div>
 
@@ -118,7 +118,7 @@ export default function Certifications() {
                 </div>
                 <div className="text-xs text-[#556B55] mt-0.5">{cert.issuer}</div>
                 {cert.year && (
-                  <div className="text-xs text-[#4CAF50] mt-1 font-medium">
+                  <div className="text-xs text-[#14B8A6] mt-1 font-medium">
                     {cert.year}
                   </div>
                 )}
@@ -150,8 +150,8 @@ export default function Certifications() {
               </div>
             ))}
           </div>
-          <span className="text-sm font-medium text-[#556B55] group-hover:text-[#2D6A2D] transition-colors">
-            +{otherCerts.length} other certifications ↗
+          <span className="text-sm font-medium text-[#556B55] group-hover:text-[#0F8A72] transition-colors">
+            +{otherCerts.length} other certifications <span className="text-[#E2672A]">↗</span>
           </span>
         </a>
 
@@ -160,7 +160,7 @@ export default function Certifications() {
           <ul className="space-y-2">
             {training.map((t) => (
               <li key={t} className="flex items-start gap-3 text-sm text-[#556B55]">
-                <span className="mt-2 shrink-0 w-1.5 h-1.5 rounded-full bg-[#4CAF50]" />
+                <span className="mt-2 shrink-0 w-1.5 h-1.5 rounded-full bg-[#E2672A]" />
                 {t}
               </li>
             ))}
