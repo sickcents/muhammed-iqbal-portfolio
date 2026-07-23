@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ExternalLink, Cpu, Layers, Printer, Mail, Database, Music, Video, Sparkles, Terminal, Info, Calendar } from "lucide-react";
+import { X, ExternalLink, Cpu, Layers, Printer, Mail, Database, Sparkles, Terminal, Info, Calendar } from "lucide-react";
 
 const projects = [
   {
@@ -86,14 +86,14 @@ const projects = [
   },
   {
     id: "tourism-photobooth",
-    title: "Tourism Photobooth",
-    category: "Creative · Generative AI",
-    tech: ["Generative AI", "Image Pipeline", "React", "Node", "Print API"],
+    title: "UWU Airwaves Photo Booth",
+    category: "Interactive Kiosk · GenAI",
+    tech: ["Gemini API", "Next.js", "Cloudinary", "Upstash Redis", "Resend", "ZPL"],
     description:
-      "Generative AI-powered photobooth experience themed around airline and tourism aesthetics.",
+      "A fictional premium-airline photobooth built for SIA/Changi Airport Group hiring managers — four experience modes (Photo Strip, Breath Fog, Video Call, Poem Receipt) that all share one procedurally generated boarding pass.",
     goal:
-      "Demonstrate end-to-end creative AI application — from prompt design to physical printed output.",
-    metric: "Creative GenAI and Interactive Kiosk for user engagement and content creation.",
+      "Ship an end-to-end creative kiosk: browser capture → Cloudinary/Redis session pipeline → a Gemini-personalized poem and Satori-rendered boarding pass → Zebra ZPL thermal print.",
+    metric: "4 experience modes sharing one boarding-pass spine · barcode encodes a live retrieval URL scannable straight from a phone camera",
     highlight: false,
     liveUrl: "https://photobooth.fightingwind.com",
     image: "/screenshots/tourism-photobooth.png",
@@ -223,79 +223,79 @@ const projectDetailsRegistry: Record<string, ProjectDetail> = {
   "tourism-photobooth": {
     highlightedTools: [
       {
-        title: "Suno Music Generation",
-        description: "Mimics Singapore Airlines (SIA) boarding atmosphere using music generation prompts.",
-        contribution: "Crafts custom theme songs and cabin hums to shape the ambient backdrop of the kiosk's virtual flight deck.",
-        icon: <Music className="w-5 h-5 text-[#2D6A2D]" />
-      },
-      {
-        title: "Gemini Video Structured Prompting",
-        description: "Uses JSON structured prompts to define camera motion, framing constraints, and visual styling templates.",
-        contribution: "Maintains consistent flight-theme aesthetics and transition effects even when generating disparate video assets.",
-        icon: <Video className="w-5 h-5 text-[#2D6A2D]" />
-      },
-      {
-        title: "Gemini LLM (Haiku Receipt)",
-        description: "Synthesizes themed haikus on the fly based on the user's selected journey details.",
-        contribution: "Generates quick, low-latency poetic text that prints onto the physical boarding ticket in real-time.",
+        title: "Gemini 2.5 Flash — Weather-Aware Poem Generation",
+        description: "The Poem Receipt mode feeds an emoji theme picker, the destination city, and live Open-Meteo weather for that city into one prompt; Gemini returns a haiku (5-7-5, ~50% of sessions) or a short free-verse poem.",
+        contribution: "Makes every printed receipt genuinely different per session instead of a templated fill-in-the-blank, while staying fast enough for a walk-up kiosk.",
         icon: <Sparkles className="w-5 h-5 text-[#2D6A2D]" />
+      },
+      {
+        title: "Satori — Boarding Pass Rendering Without a Browser",
+        description: "The shared Boarding Pass artifact (flight number, route, seat, gate, QR code, Code 128 barcode) is rendered server-side as HTML/CSS via Satori + resvg straight to a PNG — no headless browser at request time.",
+        contribution: "Keeps boarding-pass generation fast and stateless on serverless functions, since spinning up a real browser per request would be far too slow for a live kiosk queue.",
+        icon: <Terminal className="w-5 h-5 text-[#2D6A2D]" />
+      },
+      {
+        title: "Cloudinary + Upstash Redis Session Pipeline",
+        description: "All four modes' media (strip PNGs, 15s/10s videos, GIFs) go through Cloudinary; session state and a 7-day TTL live in Upstash Redis, so a daily cron purges both in lockstep once a session expires.",
+        contribution: "One storage/session backbone serves four very different capture types — photos, canvas video, webcam video, generated poem — without mode-specific plumbing.",
+        icon: <Database className="w-5 h-5 text-[#2D6A2D]" />
       }
     ],
     designChoices: [
       {
-        title: "Structured GenAI Asset Creation",
-        choice: "Thematic video loops and cabin boarding music are pre-authored using GenAI prompts.",
-        rationale: "Establishes a structured creative use of GenAI asset creation for the project goal, securing direct alignment with the Singapore Airlines brand narrative and visual experience."
+        title: "Shared Boarding Pass Spine Across 4 Modes",
+        choice: "Every mode — Photo Strip, Breath Fog, Video Call, Poem Receipt — produces the same Boarding Pass as a constant output, with only the mode-specific artifact layered on top.",
+        rationale: "Keeps the UWU Airwaves identity consistent no matter which mode a guest picks, and gives every session the same scannable Session ID and retrieval mechanism instead of four bespoke output documents."
       },
       {
-        title: "On-the-fly Haiku Text Prompting",
-        choice: "Invoking the Gemini LLM dynamically at runtime for the receipt boarding poetry.",
-        rationale: "Integrates personalized content generation instantly into the user flow without disrupting the high-pace kiosk experience."
+        title: "Barcode Encodes the Full Retrieval URL, Not Just the Session ID",
+        choice: "The boarding pass's Code 128 barcode encodes the entire retrieval-page URL (e.g. .../session/UWU-2847-SIN-TYO) instead of the bare session ID.",
+        rationale: "A URL opens directly from a phone camera's viewfinder with zero typing; a bare session ID string gives no such affordance and would need to be typed in by hand."
       },
       {
-        title: "Node/FFmpeg Processing Server",
-        choice: "Routing captured webcam media to a background server running FFmpeg.",
-        rationale: "Maintains absolute control over visual borders, cropping and reframing the photo/video assets dynamically for the airline boarding pass layout."
+        title: "Mode Selection Comes Before Check-In",
+        choice: "The first screen a guest sees is 'pick your adventure' — four large tiles for the four experience modes — before any destination or name is entered.",
+        rationale: "The mode choice is the exciting part and the strongest hook at a kiosk; asking for a destination and name first would put a boring form between the guest and the reason they walked up."
       }
     ],
     kioskHardware: [
-      "Connected webcam for live high-definition video/photo captures",
-      "Interactive retro-telephone microphone for voice-theme selection",
-      "Touch screen monitor acting as the main dashboard and terminal console",
-      "Connected Zebra printer for receipt/boarding pass ZPL ticket prints"
+      "Connected webcam for Photo Strip, Breath Fog, and Video Call capture via the browser getUserMedia API",
+      "Touch-screen kiosk display running the full Next.js app locally at events",
+      "Zebra ZD620 thermal printer driven by a Next.js API route that generates ZPL — functional only in the local/event deployment, not the public Vercel demo",
+      "No barcode scanner needed: the boarding pass's Code 128 barcode encodes a full URL, openable straight from any phone camera"
     ],
     mediaPipeline: {
-      captureAndFormat: "Webcam feeds are captured via media streams, sent to a background server running FFmpeg to crop, format, and overlay the signature boarding frame, then saved under Cloudinary storage.",
-      emailDelivery: "Immediately after the ZPL receipt prints, a customized HTML email is dispatched via API containing CDN-hosted download links for the passenger's photo/video along with the printed haiku."
+      captureAndFormat: "Photo Strip composites 4 frames vertically inside the aircraft-window mask; Breath Fog and Video Call capture a canvas/webcam recording. All media uploads to Cloudinary, chosen specifically because Vercel Blob (the original choice) has no video transcoding.",
+      emailDelivery: "Digital Copy delivery via Resend, styled as a UWU Airwaves confirmation email with the strip/boarding-pass PNGs and an animated GIF attached; sessions and their Cloudinary assets are purged after a 7-day Redis TTL via a daily cron."
     },
     steps: [
       {
-        title: "Kiosk Vibe Selection Dashboard",
-        description: "Passengers choose between four custom travel media modules (Photo Strip, Breath Fog, Video Call, or Poem Receipt) styled with airline flight deck aesthetics.",
+        title: "Pick Your Adventure — Four Experience Modes",
+        description: "The entry screen: four touch tiles for Photo Strip, Breath Fog, Video Call, and Poem Receipt, each producing a different primary artifact but sharing one boarding pass.",
         image: "/screenshots/tourism-photobooth/1_home.png"
       },
       {
-        title: "Poem Receipt Generation",
-        description: "Selecting flight preferences prompts the real-time Gemini LLM to compile a custom-themed haiku printed directly on the passenger boarding card.",
-        image: "/screenshots/tourism-photobooth/2_poem_select.png"
+        title: "Destination Check-In",
+        description: "Airport autocomplete over ~500 major international airports resolves a typed city, country, or IATA code; origin is always fixed as Singapore (SIN). Name and email (with one-tap domain suffixes) are optional.",
+        image: "/screenshots/tourism-photobooth/2_destination.png"
       },
       {
-        title: "Photo Strip Webcam Capture",
-        description: "Connected HD webcams capture passenger poses, reframing them via a background FFmpeg pipeline to apply custom border overlays.",
-        image: "/screenshots/tourism-photobooth/3_photo_view.png"
+        title: "Poem Receipt: Emoji Theme Picker",
+        description: "Guests tap travel themes — Food, Culture, Scenery, Music, Shopping, Rest, Adventure, Magic — that, combined with live destination weather, drive the Gemini prompt.",
+        image: "/screenshots/tourism-photobooth/3_poem_theme.png"
       },
       {
-        title: "Interactive Breath Fog Canvas",
-        description: "Allows passengers to draw sketches or message marks over a fogged cabin window simulation during flight boarding.",
-        image: "/screenshots/tourism-photobooth/4_fog_view.png"
+        title: "Showcase: Real-Time Poem + Boarding Pass",
+        description: "The actual Gemini-generated poem on a torn-edge thermal receipt, alongside the procedurally generated boarding pass — flight number, seat, gate, QR code, and barcode — all produced live for this session.",
+        image: "/screenshots/tourism-photobooth/4_showcase.png"
       }
     ],
     techStack: {
-      languages: "TypeScript, React, Node.js, Python, ZPL",
-      frontend: "Next.js, Tailwind CSS, Vercel, Framer Motion",
-      databases: "Neon Postgres, Cloudinary API, SendGrid",
-      aiOrSystems: "Gemini LLM, Gemini Video (JSON Prompts), Suno AI",
-      aiOrSystemsLabel: "Generative AI"
+      languages: "TypeScript, React",
+      frontend: "Next.js App Router, Tailwind CSS, Satori/resvg (boarding pass rendering)",
+      databases: "Upstash Redis (session/TTL), Cloudinary (media storage)",
+      aiOrSystems: "Gemini 2.5 Flash, Resend (email), Zebra ZD620 ZPL printing",
+      aiOrSystemsLabel: "Generative AI & Integrations"
     }
   },
   "buslari": {
@@ -613,49 +613,49 @@ function ProjectModal({
                 {project.id === "tourism-photobooth" && (
                   <div className="relative p-4 bg-[#FAF8F4] border border-[#DDD8CC] rounded-lg overflow-x-auto min-w-[500px]">
                     <div className="flex items-center justify-between text-center relative z-10">
-                      
-                      {/* User Capture */}
+
+                      {/* Guest Capture */}
                       <div className="w-[140px] flex flex-col items-center">
                         <div className="w-12 h-12 rounded-full bg-[#E0EBE0] border border-[#2D6A2D] flex items-center justify-center text-[#2D6A2D] font-bold mb-2">
                           1
                         </div>
-                        <span className="text-xs font-bold text-[#1A2E1A]">Passenger Desk</span>
+                        <span className="text-xs font-bold text-[#1A2E1A]">Kiosk Capture</span>
                         <span className="text-[10px] text-[#556B55] mt-1 leading-snug">
-                          Touch Screen<br/>Webcam & Phone Mic
+                          4 Experience Modes<br/>Webcam / Canvas / Emoji Picker
                         </span>
                       </div>
 
                       {/* Flow Line 1 */}
                       <div className="flex-1 h-[2px] bg-[#DDD8CC] mx-2 relative">
                         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 border-t-2 border-r-2 border-[#556B55] rotate-45" />
-                        <span className="absolute bottom-1 left-1/2 -translate-x-1/2 text-[9px] text-[#556B55] whitespace-nowrap bg-[#FAF8F4] px-1 font-medium">Capture Feed</span>
+                        <span className="absolute bottom-1 left-1/2 -translate-x-1/2 text-[9px] text-[#556B55] whitespace-nowrap bg-[#FAF8F4] px-1 font-medium">Upload / Prompt</span>
                       </div>
 
-                      {/* Backend API Server */}
+                      {/* Next.js API Routes */}
                       <div className="w-[150px] flex flex-col items-center">
                         <div className="w-12 h-12 rounded-full bg-[#E0EBE0] border border-[#2D6A2D] flex items-center justify-center text-[#2D6A2D] font-bold mb-2">
                           2
                         </div>
-                        <span className="text-xs font-bold text-[#1A2E1A]">Serverless Backend</span>
+                        <span className="text-xs font-bold text-[#1A2E1A]">Next.js API Routes</span>
                         <span className="text-[10px] text-[#556B55] mt-1 leading-snug">
-                          Node API (Vercel)<br/>FFmpeg reframing server
+                          Gemini Poem · Satori Boarding Pass<br/>Redis Session (7-day TTL)
                         </span>
                       </div>
 
                       {/* Flow Line 2 */}
                       <div className="flex-1 h-[2px] bg-[#DDD8CC] mx-2 relative">
                         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 border-t-2 border-r-2 border-[#556B55] rotate-45" />
-                        <span className="absolute bottom-1 left-1/2 -translate-x-1/2 text-[9px] text-[#556B55] whitespace-nowrap bg-[#FAF8F4] px-1 font-medium">Process & DB</span>
+                        <span className="absolute bottom-1 left-1/2 -translate-x-1/2 text-[9px] text-[#556B55] whitespace-nowrap bg-[#FAF8F4] px-1 font-medium">Store & Output</span>
                       </div>
 
-                      {/* Services/Outputs */}
+                      {/* Outputs */}
                       <div className="w-[140px] flex flex-col items-center">
                         <div className="w-12 h-12 rounded-full bg-[#E0EBE0] border border-[#2D6A2D] flex items-center justify-center text-[#2D6A2D] font-bold mb-2">
                           3
                         </div>
-                        <span className="text-xs font-bold text-[#1A2E1A]">Terminal Outputs</span>
+                        <span className="text-xs font-bold text-[#1A2E1A]">Outputs</span>
                         <span className="text-[10px] text-[#556B55] mt-1 leading-snug">
-                          Zebra ZPL Ticket<br/>Cloudinary & Email
+                          Cloudinary Media<br/>Zebra ZPL Print & Resend Email
                         </span>
                       </div>
 
@@ -664,16 +664,16 @@ function ProjectModal({
                     {/* Subagent / Cloud connections */}
                     <div className="grid grid-cols-3 mt-6 pt-5 border-t border-[#EAE6DB] text-center">
                       <div className="text-[10px] text-[#556B55] px-2 border-r border-[#EAE6DB]">
-                        <span className="font-semibold block text-[#1A2E1A]">Pre-generated GenAI</span>
-                        Suno Cabin Music & Gemini Video theme templates are pre-rendered to save latency.
+                        <span className="font-semibold block text-[#1A2E1A]">Weather-Aware Poem</span>
+                        Gemini 2.5 Flash generates a haiku or free-verse poem live from emoji themes + destination weather.
                       </div>
                       <div className="text-[10px] text-[#556B55] px-2 border-r border-[#EAE6DB]">
-                        <span className="font-semibold block text-[#1A2E1A]">Real-time LLM Call</span>
-                        Gemini LLM queries live during UI selection to generate custom themed haikus.
+                        <span className="font-semibold block text-[#1A2E1A]">Shared Boarding Pass</span>
+                        Every mode renders the same Satori boarding pass — procedurally generated flight, seat, gate, QR code, and barcode.
                       </div>
                       <div className="text-[10px] text-[#556B55] px-2">
-                        <span className="font-semibold block text-[#1A2E1A]">Serverless Database</span>
-                        Neon Serverless Postgres tracks active sessions, user choices, and capture logs.
+                        <span className="font-semibold block text-[#1A2E1A]">7-Day Session Lifecycle</span>
+                        Upstash Redis TTL and a daily cron keep Redis and Cloudinary assets in sync, purging both together.
                       </div>
                     </div>
                   </div>
