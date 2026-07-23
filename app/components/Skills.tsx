@@ -107,11 +107,11 @@ export default function Skills() {
           {experience.map((job, i) => (
             <div key={i} className="pl-12 relative">
               {i < experience.length - 1 ? (
-                <div className="absolute left-4 top-[13px] bottom-[-45px] w-px bg-[#DDD8CC]" />
+                <div className="absolute left-[16.5px] top-[13px] bottom-[-45px] w-px bg-[#DDD8CC]" />
               ) : (
                 <>
-                  <div className="absolute left-4 top-[18px] w-px h-7 bg-[#DDD8CC]" />
-                  <div className="absolute left-[11px] top-[44px] w-2.5 h-px bg-[#DDD8CC]" />
+                  <div className="absolute left-[16.5px] top-[18px] h-[18px] w-px bg-[#DDD8CC]" />
+                  <div className="absolute left-3 top-[36px] w-2.5 h-px bg-[#DDD8CC]" />
                 </>
               )}
               <div className="absolute left-3 top-2 w-2.5 h-2.5 rounded-full bg-[#2D6A2D] border-2 border-[#FAF8F4] ring-1 ring-[#2D6A2D]" />
