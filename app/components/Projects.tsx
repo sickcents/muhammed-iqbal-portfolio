@@ -22,10 +22,10 @@ const projects = [
     id: "auto-negotiator",
     title: "Auto Negotiator",
     category: "Agentic AI",
-    tech: ["AI Agents", "Tool Use", "Email API", "Calendar API", "Python"],
+    tech: ["Gemini API", "Node.js/TypeScript", "Neon Postgres", "Vercel Functions", "Agent Tool Use"],
     description:
-      "Multi-tool AI agent orchestrating email, calendar, and records APIs to automate procurement negotiation end-to-end.",
-    goal: "Eliminate manual back-and-forth on routine procurement requests through autonomous agent decision-making.",
+      "A live LLM agent that negotiates hardware transfers between stores over a mocked email/calendar toolbelt — every reasoning step and drafted email is genuine inference against real Postgres state, never a scripted walkthrough.",
+    goal: "Eliminate manual back-and-forth on routine hardware-shortage requests through autonomous, verifiable agent decision-making.",
     metric: "Target: zero human touchpoints on standard negotiation cycles",
     highlight: true,
     liveUrl: "https://negotiate.fightingwind.com",
@@ -165,98 +165,105 @@ interface ProjectDetail {
 
 const projectDetailsRegistry: Record<string, ProjectDetail> = {
   "auto-negotiator": {
+    highlightedToolsLabel: "Live LLM Reasoning & Real-World Grounding",
     highlightedTools: [
       {
-        title: "Google Calendar API",
+        title: "Gemini via an Enforced Thought/Tool-Call Envelope",
         description:
-          "Checks local store manager calendar events to verify conflicting schedules like promotions or audits.",
+          "The `openai` SDK is pointed at Gemini's own OpenAI-compatible endpoint rather than a Google-native SDK, and every turn is forced through a {\"thought\", \"tool_call\"} JSON envelope regardless of provider — one retry on schema failure, then a visible error, never a silent hang.",
         contribution:
-          "Enables the agent to confirm manager claims about conflicts and perform automated concessions without human coordinator overhead.",
-        icon: <Calendar className="w-5 h-5 text-[#2D6A2D]" />,
+          "Keeps the Agent Console's reasoning trace identical no matter which LLM Engine is configured, and means the live demo can never lock up on an infinite retry loop.",
+        icon: <Sparkles className="w-5 h-5 text-[#2D6A2D]" />,
       },
       {
-        title: "Inventory Database / API",
+        title: "Haversine Donor Ranking Over Real MRT Coordinates",
         description:
-          "Tracks active stock levels and shortage thresholds of scanners (TC58) and printers (ZQ521) across the network.",
+          "Every ClickShop site is pinned to a real Eastern Singapore MRT station's lat/long; the same haversine distance calc backs the donor-ranking query, the courier ETA narration, and the Leaflet map — one source of truth instead of a cosmetic map plus a hand-assigned distance tier.",
         contribution:
-          "Queries live hardware counts to locate potential donor stores with spare units that meet the minimum stock constraints.",
-        icon: <Database className="w-5 h-5 text-[#2D6A2D]" />,
-      },
-      {
-        title: "Leaflet & OpenStreetMap",
-        description:
-          "Calculates geographic routing distances between ClickShop sites using GPS coordinates.",
-        contribution:
-          "Powers the donor selection engine, ranking candidate donor stores to minimize logistics time and courier distance.",
+          "Lets donor selection, dispatch ETAs, and the map view all agree with each other by construction, since they read the same coordinates.",
         icon: <Layers className="w-5 h-5 text-[#2D6A2D]" />,
+      },
+      {
+        title: "Mocked Toolbelt, Genuinely Live Reasoning",
+        description:
+          "Email/Calendar/Logistics/ZPL/ITSM are in-process mocks backed by Neon Postgres — no real Gmail OAuth or courier API — but the LLM calls behind every drafted email and decision are real, live inference against current DB state, never a scripted walkthrough.",
+        contribution:
+          "Avoids OAuth/secrets surface area in a public repo while keeping the one thing worth proving — the agent's actual reasoning — completely un-staged.",
+        icon: <Database className="w-5 h-5 text-[#2D6A2D]" />,
       },
     ],
     designChoices: [
       {
-        title: "Concession Protocol",
+        title: "Node.js/TypeScript Over the Original Python/Flask Draft",
         choice:
-          "Verifying manager's claimed calendar conflicts before conceding and rerouting to the next donor.",
+          "Rebuilt the backend in Node/TypeScript once the final architecture (stateless Vercel functions, no background thread, no ML libraries) no longer had any actual reason to be Python.",
         rationale:
-          "Ensures the agent is not easily blocked by managers refusing to share assets, whilst automatically respecting actual store events.",
+          "The Python choice was carried over from an early draft that assumed self-hosted models — once that assumption was dropped, Node.js was simply the more idiomatic fit for Vercel's serverless functions and the JS-first dependency set.",
       },
       {
-        title: "Decentralized Negotiation",
+        title: "Mocked Integrations, Never a Scripted Demo",
         choice:
-          "Allowing regional site managers to respond to requests directly rather than relying on a central coordinator.",
+          "Faked the Email/Calendar/Logistics/ZPL/ITSM APIs entirely in-process instead of wiring up real Gmail OAuth or a courier API, but routed the operator's manager-reply presets and free-text replies through the exact same parsing code path as the agent's own tool calls.",
         rationale:
-          "Removes the coordination bottleneck and cognitive load by presenting site managers with clear choices accompanied by verifiable proofs.",
+          "A real Gmail integration would only make the demo look more convincing at the cost of OAuth/secrets in a public repo — the one thing a reviewer can actually verify is that the reasoning isn't canned, which this preserves.",
       },
       {
-        title: "Distance-Stock Balancing",
+        title: "Uber-Dispatch Donor Ranking, No Site-Type Allowlist",
         choice:
-          "Restricting small/medium stores from acting as donors and prioritizing donors by haversine distance.",
+          "Every site is a ranking candidate regardless of its XL/L/M/S type; eligibility is just 'would donating this leave the donor below its own operating threshold' filtered by haversine proximity.",
         rationale:
-          "Keeps small, fast stores stocked with critical devices and ensures courier transfer routes are optimized regionally.",
+          "Hardcoding 'small stores can't donate' invites brittle edge cases — in practice S/XL sites rarely rank highly since their own threshold leaves little surplus room, so the same effect falls out of the eligibility math without a hand-maintained rule.",
       },
     ],
     agentCapabilities: [
-      "Google Calendar API to inspect scheduled local events and upcoming promotions",
-      "Gmail / Email API for automated stakeholder notifications, negotiation threads, and proof delivery",
-      "Inventory Database tracking real-time device counts of scanners (TC58) and printers (ZQ521)",
-      "Distance & Route Optimization mapping coordinate coordinates to find the nearest donor shop",
+      "Inventory API — real-time stock, 7-day depletion trend, and haversine-ranked donor candidates",
+      "Email API — drafts/reads the negotiation thread as rows in a mocked, Postgres-backed mailbox",
+      "Calendar API — checks seeded promo/foot-traffic events to verify a manager's Concession claim",
+      "Logistics API — dispatches a synthetic courier (Lalamove/GrabExpress) with a distance-based ETA",
+      "ZPL Provisioning API — generates the printer reconfiguration payload for the receiving site",
+      "ITSM API — opens and closes one ticket per Transfer for the full negotiation lifecycle",
     ],
+    agentCapabilitiesLabel: "Agent Toolbelt (lib/tools/)",
     systemIntegrations: {
+      label: "Concession, Firmness & Escalation Protocols",
+      verificationLabel: "Concession & Firmness",
       verification:
-        "The agent checks the manager's claimed calendar event against Google Calendar, verifying scheduled dates/times to confirm if they can actually spare the requested hardware.",
+        "If a manager cites a specific conflict (e.g. a promo), the agent calls the mocked Calendar API to verify it before conceding and re-ranking donors. If the manager refuses without evidence, the agent cites hard numbers from the Inventory API instead (\"your threshold is 3, you're at 6\") and sends a Firmness-lock email.",
+      dispatchLabel: "Escalation & Dispatch",
       dispatch:
-        "Once a site manager agrees to the transfer (or when an override is approved), the agent initiates the courier dispatch, records the transfer in the Inventory DB, and emails proof of transaction.",
+        "Two rejections on the same Transfer trigger 'absolute deadlock,' escalating to a Regional Director persona in the console. Once a donor agrees, the agent opens an ITSM ticket, dispatches a courier, pushes a ZPL config to the receiving printer, and closes the ticket — one ticket per Transfer, start to finish.",
     },
     steps: [
       {
         title: "Eastern Singapore ClickShop Map View",
         description:
-          "Presents a live, interactive OSM/Leaflet map displaying ClickShop stores (XL, L, M, S sizes) and their current hardware counts.",
+          "A live Leaflet/OSM map plots all 13 stores (XL/L/M/S) at their real MRT coordinates, alongside the Transfers list and Network Status panel showing live stock vs. threshold.",
         image: "/screenshots/auto-negotiator/1_dashboard.png",
       },
       {
-        title: "Simulating Device Shortage",
+        title: "Simulating a Device Shortage",
         description:
-          "An operator triggers a shortage of scanners or printers at a receiver site, immediately initializing the agentic transfer search loop.",
+          "The Simulate Incident control drops a chosen site's scanner or printer count below its operating threshold, firing the inline monitor check that kicks off the agent loop.",
         image: "/screenshots/auto-negotiator/2_negotiation_start.png",
       },
       {
         title: "Agent Decision Timeline",
         description:
-          "The AI agent executes search and ranking queries, runs calendar verifications, and manages email communication logs in the console.",
+          "The Agent Timeline panel exposes the live {\"thought\", \"tool_call\"} envelope turn-by-turn — here the agent reasons through selecting the top-ranked donor before drafting the request email.",
         image: "/screenshots/auto-negotiator/3_agent_timeline.png",
       },
       {
-        title: "Concession & Rerouting State",
+        title: "Firmness Protocol Lock",
         description:
-          "Shows the agent successfully verifying a calendar promotion, conceding the request to Bedok, and negotiating with Tampines instead.",
+          "Having verified the manager's promotion claim was false and found a 21-unit surplus, the agent applies the Firmness Protocol and locks the transfer with a numbers-backed reply.",
         image: "/screenshots/auto-negotiator/4_concession_protocol.png",
       },
     ],
     techStack: {
-      languages: "Python, JavaScript, HTML, CSS",
+      languages: "TypeScript, JavaScript, HTML, CSS",
       frontend: "Vanilla JS, Leaflet Map, CSS Tokens, Base UI",
-      databases: "SQLite / In-Memory Inventory DB, Local Logs",
-      aiOrSystems: "Google Calendar API, Gmail API, LLM Agent Tool Use",
+      databases: "Neon Serverless Postgres (Sites, Transfers, Messages, Tickets)",
+      aiOrSystems: "Gemini 3.5 Flash (OpenAI-compatible endpoint), Enforced Thought/Tool-Call Envelope, Vercel Serverless Functions",
       aiOrSystemsLabel: "Agent Tool Use & APIs",
     },
   },
@@ -861,17 +868,17 @@ function ProjectModal({
                     <div className="grid grid-cols-3 mt-6 pt-5 border-t border-[#EAE6DB] text-center">
                       <div className="text-[10px] text-[#556B55] px-2 border-r border-[#EAE6DB]">
                         <span className="font-semibold block text-[#1A2E1A]">
-                          Calendar & Inventory APIs
+                          Mocked Calendar & Inventory APIs
                         </span>
-                        Checks donor's Google Calendar and stock metrics to
-                        verify if assets can actually be spared.
+                        Checks seeded promo events and live stock metrics in
+                        Neon Postgres to verify if assets can actually be spared.
                       </div>
                       <div className="text-[10px] text-[#556B55] px-2 border-r border-[#EAE6DB]">
                         <span className="font-semibold block text-[#1A2E1A]">
                           Concession Protocol
                         </span>
-                        If donor manager replies with calendar conflicts, agent
-                        validates and falls back to next donor.
+                        If donor manager replies citing a conflict, agent
+                        verifies it and falls back to the next-ranked donor.
                       </div>
                       <div className="text-[10px] text-[#556B55] px-2">
                         <span className="font-semibold block text-[#1A2E1A]">
