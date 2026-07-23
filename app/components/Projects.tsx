@@ -48,13 +48,13 @@ const projects = [
   {
     id: "buslari",
     title: "Buslari",
-    category: "Web App · API",
-    tech: ["LTA API", "Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
+    category: "Home Kiosk · Full-Stack",
+    tech: ["LTA API", "Next.js", "Neon Postgres", "Drizzle ORM", "Telegram Bot API"],
     description:
-      "Solari board-inspired transit dashboard integrating Singapore's Land Transport Authority (LTA) API for real-time bus arrival timings.",
+      "A split-flap Solari board (Bus + Solari) reborn as a home dashboard — repurposing an old iPad to show live Singapore bus arrivals, prayer times, and messages texted in over Telegram.",
     goal:
-      "Build a beautiful, retro-styled solari display to show live bus arrival updates for public transit.",
-    metric: "Responsive Solari animations with live bus arrival updates",
+      "Give a spare iPad a second life as a retro flip-board kiosk that earns its spot on the wall: live transit info alongside prayer/holiday panels and a personal message board the household can update remotely.",
+    metric: "Adaptive LTA cache (20s–2min TTL) keeps 3 bus stops live without hammering rate limits",
     highlight: false,
     liveUrl: "https://buslari.fightingwind.com",
     image: "/screenshots/buslari.png",
@@ -101,6 +101,7 @@ const projects = [
 ];
 
 interface ProjectDetail {
+  highlightedToolsLabel?: string;
   highlightedTools: {
     title: string;
     description: string;
@@ -123,8 +124,12 @@ interface ProjectDetail {
     image: string;
   }[];
   agentCapabilities?: string[];
+  agentCapabilitiesLabel?: string;
   systemIntegrations?: {
+    label?: string;
+    verificationLabel?: string;
     verification: string;
+    dispatchLabel?: string;
     dispatch: string;
   };
   techStack?: {
@@ -291,6 +296,89 @@ const projectDetailsRegistry: Record<string, ProjectDetail> = {
       databases: "Neon Postgres, Cloudinary API, SendGrid",
       aiOrSystems: "Gemini LLM, Gemini Video (JSON Prompts), Suno AI",
       aiOrSystemsLabel: "Generative AI"
+    }
+  },
+  "buslari": {
+    highlightedToolsLabel: "Key Integrations & Tools",
+    highlightedTools: [
+      {
+        title: "LTA DataMall Bus Arrival & BusStops APIs",
+        description: "Polls Singapore's LTA DataMall Bus Arrival (v3) and BusStops endpoints per configured stop, proxied server-side so the API key never reaches the browser.",
+        contribution: "Feeds real-time arrival minutes into the board, with automatic stop-name lookup so adding a new bus stop code renders correctly without manual entry.",
+        icon: <Database className="w-5 h-5 text-[#2D6A2D]" />
+      },
+      {
+        title: "Adaptive Arrival Cache",
+        description: "A per-stop in-memory cache whose TTL shrinks as the soonest bus gets closer — 20s when a bus is imminent, up to 2 minutes when nothing is due soon.",
+        contribution: "Keeps the board accurate as buses approach while staying well under LTA's rate limits — accuracy where it matters, patience where it doesn't.",
+        icon: <Terminal className="w-5 h-5 text-[#2D6A2D]" />
+      },
+      {
+        title: "Telegram Bot + NextAuth/Drizzle/Neon",
+        description: "A linked Telegram bot posts straight into a board's Messages panel; NextAuth (Google/GitHub) plus Drizzle ORM on Neon Postgres gives every signed-in user their own persisted board.",
+        contribution: "Turns the board into a two-way personal message board you can update from your phone, without ever touching the admin panel.",
+        icon: <Mail className="w-5 h-5 text-[#2D6A2D]" />
+      }
+    ],
+    designChoices: [
+      {
+        title: "Two-Layer Split-Flap Animation",
+        choice: "Each character tile is built from two independently shaded, clip-path-split halves with a 0.1s rotateX flip and a deliberate offset between the halves.",
+        rationale: "A single flat flip looked too clean and digital — splitting the halves with gradient shading per half mimics the physical seam and worn imperfection of a real airport/train Solari board."
+      },
+      {
+        title: "Adaptive Cache Over Fixed Polling",
+        choice: "Cache TTL scales with how soon the next bus is arriving instead of polling on a flat interval.",
+        rationale: "LTA DataMall rate-limits aggressively; a flat poll wastes quota on a bus 20 minutes out while a bus 1 minute out needs to be fresh. Adaptive TTL puts the budget where accuracy actually matters."
+      },
+      {
+        title: "Home Kiosk, Not a Moving Product",
+        choice: "No geolocation or nearby-stop detection — bus stops are entered once by hand and renamed in the admin panel, on the assumption the board lives at a fixed physical location.",
+        rationale: "Bus Lari (a play on 'bus' and 'Solari') is built to run on a repurposed old iPad mounted at home, not travel with you — so it optimizes for a stable, always-on display, with Telegram messaging and Prayer/Holiday panels layered on so it earns its place on the wall beyond just bus times."
+      }
+    ],
+    agentCapabilities: [
+      "LTA DataMall Bus Arrival (v3) API for live arrival timings per stop and service",
+      "LTA DataMall BusStops API for automatic stop-name lookup on add",
+      "Telegram Bot API webhook, linked per-user via a short-lived code",
+      "NextAuth (Google/GitHub) with Drizzle adapter for multi-user, database-backed sessions"
+    ],
+    agentCapabilitiesLabel: "System Integrations & APIs",
+    systemIntegrations: {
+      label: "Telegram Linking & Message Flow",
+      verificationLabel: "Account Linking",
+      verification: "A user generates a short-lived link code in the admin panel and sends `/start <code>` to their Telegram bot; the webhook matches the code, links the chat ID to their account, and the code is consumed.",
+      dispatchLabel: "Message Delivery",
+      dispatch: "From then on, any message sent to the bot is appended to that user's Messages panel — reviewable and removable from the same Custom Messages list the admin page manages directly."
+    },
+    steps: [
+      {
+        title: "Live Multi-Stop Bus Board",
+        description: "Three bus stops (Downstairs, Main Road, Opposite) grouped and flipping in real time, with a blinking LED-style marker simulating the physical board's arrival indicator.",
+        image: "/screenshots/buslari/1_board.png"
+      },
+      {
+        title: "Admin: Bus Stops, Panels & Board Settings",
+        description: "Add and reorder bus stops and panels, tune flip animation speed and page duration, plus a per-device animation override for older tablets that can't render the full-speed flip smoothly.",
+        image: "/screenshots/buslari/2_admin.png"
+      },
+      {
+        title: "Custom Messages & Telegram Linking",
+        description: "A linked Telegram bot lets you text your own board — messages land in the Custom Messages queue here, reviewable and removable from the same panel.",
+        image: "/screenshots/buslari/3_telegram.png"
+      },
+      {
+        title: "Messages Panel on the Board",
+        description: "The Messages panel rotates through custom quotes and Telegram-submitted notes on the physical display, alongside the Bus, Prayer, and Holiday panels.",
+        image: "/screenshots/buslari/4_messages.png"
+      }
+    ],
+    techStack: {
+      languages: "JavaScript, SQL, CSS",
+      frontend: "Next.js App Router, NextAuth, Vanilla CSS Animations",
+      databases: "Neon Postgres (serverless), Drizzle ORM",
+      aiOrSystems: "LTA DataMall API, Telegram Bot API, Google/GitHub OAuth",
+      aiOrSystemsLabel: "Integrations & APIs"
     }
   }
 };
@@ -659,13 +747,82 @@ function ProjectModal({
                     </div>
                   </div>
                 )}
+
+                {project.id === "buslari" && (
+                  <div className="relative p-4 bg-[#FAF8F4] border border-[#DDD8CC] rounded-lg overflow-x-auto min-w-[500px]">
+                    <div className="flex items-center justify-between text-center relative z-10">
+
+                      {/* Kiosk Display */}
+                      <div className="w-[140px] flex flex-col items-center">
+                        <div className="w-12 h-12 rounded-full bg-[#E0EBE0] border border-[#2D6A2D] flex items-center justify-center text-[#2D6A2D] font-bold mb-2">
+                          1
+                        </div>
+                        <span className="text-xs font-bold text-[#1A2E1A]">Home Kiosk Display</span>
+                        <span className="text-[10px] text-[#556B55] mt-1 leading-snug">
+                          Repurposed iPad<br/>Split-Flap Board UI
+                        </span>
+                      </div>
+
+                      {/* Flow Line 1 */}
+                      <div className="flex-1 h-[2px] bg-[#DDD8CC] mx-2 relative">
+                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 border-t-2 border-r-2 border-[#556B55] rotate-45" />
+                        <span className="absolute bottom-1 left-1/2 -translate-x-1/2 text-[9px] text-[#556B55] whitespace-nowrap bg-[#FAF8F4] px-1 font-medium">Poll Board Data</span>
+                      </div>
+
+                      {/* Next.js Server */}
+                      <div className="w-[150px] flex flex-col items-center">
+                        <div className="w-12 h-12 rounded-full bg-[#E0EBE0] border border-[#2D6A2D] flex items-center justify-center text-[#2D6A2D] font-bold mb-2">
+                          2
+                        </div>
+                        <span className="text-xs font-bold text-[#1A2E1A]">Next.js Route Handlers</span>
+                        <span className="text-[10px] text-[#556B55] mt-1 leading-snug">
+                          Adaptive LTA Cache<br/>Drizzle / Neon Postgres
+                        </span>
+                      </div>
+
+                      {/* Flow Line 2 */}
+                      <div className="flex-1 h-[2px] bg-[#DDD8CC] mx-2 relative">
+                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 border-t-2 border-r-2 border-[#556B55] rotate-45" />
+                        <span className="absolute bottom-1 left-1/2 -translate-x-1/2 text-[9px] text-[#556B55] whitespace-nowrap bg-[#FAF8F4] px-1 font-medium">Proxy & Persist</span>
+                      </div>
+
+                      {/* External Services */}
+                      <div className="w-[140px] flex flex-col items-center">
+                        <div className="w-12 h-12 rounded-full bg-[#E0EBE0] border border-[#2D6A2D] flex items-center justify-center text-[#2D6A2D] font-bold mb-2">
+                          3
+                        </div>
+                        <span className="text-xs font-bold text-[#1A2E1A]">External Services</span>
+                        <span className="text-[10px] text-[#556B55] mt-1 leading-snug">
+                          LTA DataMall API<br/>Telegram Bot API
+                        </span>
+                      </div>
+
+                    </div>
+
+                    {/* Subagent / Cloud connections */}
+                    <div className="grid grid-cols-3 mt-6 pt-5 border-t border-[#EAE6DB] text-center">
+                      <div className="text-[10px] text-[#556B55] px-2 border-r border-[#EAE6DB]">
+                        <span className="font-semibold block text-[#1A2E1A]">Adaptive LTA Cache</span>
+                        Bus Arrival responses are cached 20s-2min per stop based on the soonest arrival, keeping the board fresh without exceeding LTA's rate limits.
+                      </div>
+                      <div className="text-[10px] text-[#556B55] px-2 border-r border-[#EAE6DB]">
+                        <span className="font-semibold block text-[#1A2E1A]">Telegram Webhook</span>
+                        Incoming bot messages are matched to a linked account via chat ID and appended straight to that user's Messages panel.
+                      </div>
+                      <div className="text-[10px] text-[#556B55] px-2">
+                        <span className="font-semibold block text-[#1A2E1A]">Multi-User Boards</span>
+                        NextAuth (Google/GitHub) plus Drizzle/Neon gives each signed-in user their own persisted board, bus stops, and settings.
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Use of Multimodal Generative AI */}
               <div className="space-y-4">
                 <h3 className="text-sm font-semibold text-[#1A2E1A] flex items-center gap-1.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#4CAF50]" />
-                  Use of Multimodal Generative AI
+                  {details.highlightedToolsLabel || "Use of Multimodal Generative AI"}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {details.highlightedTools.map((tool, idx) => (
@@ -709,7 +866,7 @@ function ProjectModal({
                     <div className="bg-white border border-[#DDD8CC] rounded-xl p-5">
                       <h3 className="text-sm font-semibold text-[#1A2E1A] mb-4 flex items-center gap-1.5">
                         <Terminal className="w-4 h-4 text-[#2D6A2D]" />
-                        Agent Tool Integration & APIs
+                        {details.agentCapabilitiesLabel || "Agent Tool Integration & APIs"}
                       </h3>
                       <ul className="space-y-2.5">
                         {details.agentCapabilities.map((item, idx) => (
@@ -747,16 +904,16 @@ function ProjectModal({
                       <div>
                         <h3 className="text-sm font-semibold text-[#1A2E1A] mb-2 flex items-center gap-1.5">
                           <Mail className="w-4 h-4 text-[#2D6A2D]" />
-                          Automated Verification & Proofs
+                          {details.systemIntegrations.label || "Automated Verification & Proofs"}
                         </h3>
                         <p className="text-xs text-[#556B55] leading-relaxed">
-                          <span className="font-bold text-[#1A2E1A]">Verification: </span>
+                          <span className="font-bold text-[#1A2E1A]">{details.systemIntegrations.verificationLabel || "Verification"}: </span>
                           {details.systemIntegrations.verification}
                         </p>
                       </div>
                       <div className="border-t border-[#EAE6DB] pt-3">
                         <p className="text-xs text-[#556B55] leading-relaxed">
-                          <span className="font-bold text-[#1A2E1A]">Proof Delivery: </span>
+                          <span className="font-bold text-[#1A2E1A]">{details.systemIntegrations.dispatchLabel || "Proof Delivery"}: </span>
                           {details.systemIntegrations.dispatch}
                         </p>
                       </div>
