@@ -47,7 +47,7 @@ export default function Hero() {
 
         <div className="mt-24 grid grid-cols-3 gap-8 max-w-lg border-t border-[#DDD8CC] pt-10">
           {[
-            { value: "14+", label: "Years in engineering" },
+            { value: "19+", label: "Years in engineering" },
             {
               value: "100+",
               label: "Users on tools, from local to global use",
