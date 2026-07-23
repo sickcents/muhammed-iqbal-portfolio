@@ -32,31 +32,6 @@ const projects = [
     image: "/screenshots/auto-negotiator.png",
   },
   {
-    id: "procurement-classifier",
-    title: "Procurement Classifier",
-    category: "ML · Web App",
-    tech: ["ML Classification", "Flask", "Python", "AWS", "React"],
-    description:
-      "ML classification model integrated into a Flask web application delivering single-click procurement categorization.",
-    goal: "Replace 4-window context switching with actionable ML intelligence surfaced directly in the workflow.",
-    metric: "Deployed to 100+ operational stakeholders across APAC",
-    highlight: false,
-  },
-  {
-    id: "opensesame",
-    title: "OpenSesame",
-    category: "Systems · 3D Web",
-    tech: ["PDF Extraction", "SVG Processing", "Three.js", "Python", "Node"],
-    description:
-      "PDF extraction → SVG processing → 3D web rendering pipeline for real-time indoor asset fault reporting and wayfinding.",
-    goal: "Give facility and operations teams live visibility into asset status without requiring on-site presence.",
-    metric:
-      "Operational visibility for global facility teams across multiple sites",
-    highlight: false,
-    liveUrl: "https://opensesame.fightingwind.com",
-    image: "/screenshots/opensesame.png",
-  },
-  {
     id: "buslari",
     title: "Buslari",
     category: "Home Kiosk · Full-Stack",
@@ -75,6 +50,52 @@ const projects = [
     highlight: false,
     liveUrl: "https://buslari.fightingwind.com",
     image: "/screenshots/buslari.png",
+  },
+  {
+    id: "tourism-photobooth",
+    title: "UWU Airwaves Photo Booth",
+    category: "Interactive Kiosk · GenAI",
+    tech: [
+      "Gemini API",
+      "Next.js",
+      "Cloudinary",
+      "Upstash Redis",
+      "Resend",
+      "ZPL",
+    ],
+    description:
+      "A fictional premium-airline photobooth built for creative engagement with Airport Experience and Tourism Stakeholders — four experience modes (Photo Strip, Breath Fog, Video Call, Poem Receipt) that all share one procedurally generated boarding pass.",
+    goal: "Ship an end-to-end creative kiosk: browser capture → Cloudinary/Redis session pipeline → a Gemini-personalized poem and Satori-rendered boarding pass → Zebra ZPL thermal print.",
+    metric:
+      "4 experience modes sharing one boarding-pass spine · barcode encodes a live retrieval URL scannable straight from a phone camera",
+    highlight: false,
+    liveUrl: "https://photobooth.fightingwind.com",
+    image: "/screenshots/tourism-photobooth.png",
+  },
+  {
+    id: "opensesame",
+    title: "OpenSesame",
+    category: "Systems · 3D Web",
+    tech: ["PDF Extraction", "SVG Processing", "Three.js", "Python", "Node"],
+    description:
+      "PDF extraction → SVG processing → 3D web rendering pipeline for real-time indoor asset fault reporting and wayfinding.",
+    goal: "Give facility and operations teams live visibility into asset status without requiring on-site presence.",
+    metric:
+      "Operational visibility for global facility teams across multiple sites",
+    highlight: false,
+    liveUrl: "https://opensesame.fightingwind.com",
+    image: "/screenshots/opensesame.png",
+  },
+  {
+    id: "procurement-classifier",
+    title: "Procurement Classifier",
+    category: "ML · Web App",
+    tech: ["ML Classification", "Flask", "Python", "AWS", "React"],
+    description:
+      "ML classification model integrated into a Flask web application delivering single-click procurement categorization.",
+    goal: "Replace 4-window context switching with actionable ML intelligence surfaced directly in the workflow.",
+    metric: "Deployed to 100+ operational stakeholders across APAC",
+    highlight: false,
   },
   {
     id: "eucd-kiosks",
@@ -98,27 +119,6 @@ const projects = [
     metric:
       "95% reduction in label generation time · Global rollout across APAC and ME regions",
     highlight: false,
-  },
-  {
-    id: "tourism-photobooth",
-    title: "UWU Airwaves Photo Booth",
-    category: "Interactive Kiosk · GenAI",
-    tech: [
-      "Gemini API",
-      "Next.js",
-      "Cloudinary",
-      "Upstash Redis",
-      "Resend",
-      "ZPL",
-    ],
-    description:
-      "A fictional premium-airline photobooth built for creative engagement with Airport Experience and Tourism Stakeholders — four experience modes (Photo Strip, Breath Fog, Video Call, Poem Receipt) that all share one procedurally generated boarding pass.",
-    goal: "Ship an end-to-end creative kiosk: browser capture → Cloudinary/Redis session pipeline → a Gemini-personalized poem and Satori-rendered boarding pass → Zebra ZPL thermal print.",
-    metric:
-      "4 experience modes sharing one boarding-pass spine · barcode encodes a live retrieval URL scannable straight from a phone camera",
-    highlight: false,
-    liveUrl: "https://photobooth.fightingwind.com",
-    image: "/screenshots/tourism-photobooth.png",
   },
 ];
 
