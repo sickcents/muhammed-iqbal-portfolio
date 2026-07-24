@@ -54,6 +54,14 @@ export default function Contact() {
             >
               GitHub
             </a>
+            <a
+              href="https://www.credly.com/users/muhammed-iqbal-bin-abdul-rahman/badges/credly"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 border border-[#DDD8CC] text-[#1A2E1A] px-6 py-3.5 rounded-full font-semibold hover:border-[#0F8A72] hover:text-[#0F8A72] transition-colors"
+            >
+              Credly credentials
+            </a>
           </div>
         </div>
 
@@ -61,14 +69,6 @@ export default function Contact() {
           <span className="text-sm text-[#556B55]">
             © 2026 Muhammed Iqbal · Singapore
           </span>
-          <a
-            href="https://www.credly.com/users/muhammed-iqbal-bin-abdul-rahman/badges/credly"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-[#556B55] hover:text-[#0F8A72] transition-colors"
-          >
-            Credly credentials <span className="text-[#E2672A]">→</span>
-          </a>
         </div>
       </div>
     </section>
