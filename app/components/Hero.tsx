@@ -40,7 +40,7 @@ export default function Hero() {
               className="inline-flex items-center gap-2 bg-[#0F8A72] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#0B6B58] transition-colors"
             >
               View projects
-              <span className="border border-[#DDD8CC] text-[#E2672A]">↓</span>
+              <span className="text-[#DDD8CC]">↓</span>
             </a>
             <a
               href="#contact"

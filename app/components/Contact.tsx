@@ -60,7 +60,7 @@ export default function Contact() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 border border-[#DDD8CC] text-[#1A2E1A] px-6 py-3.5 rounded-full font-semibold hover:border-[#0F8A72] hover:text-[#0F8A72] transition-colors"
             >
-              Credly credentials
+              Credly
             </a>
           </div>
         </div>
