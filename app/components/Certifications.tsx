@@ -2,6 +2,12 @@ import Image from "next/image";
 
 const certs = [
   {
+    name: "AWS Certified Cloud Practitioner",
+    issuer: "Amazon Web Services",
+    year: "2026",
+    badgeImage: "/badges/aws-cloud-practitioner.png",
+  },
+  {
     name: "AWS Certified AI Practitioner",
     issuer: "Amazon Web Services",
     year: "2026",
@@ -14,16 +20,23 @@ const certs = [
     badgeImage: "/badges/csm.png",
   },
   {
-    name: "AWS Certified SysOps Administrator — Associate",
-    issuer: "Amazon Web Services",
-    year: "2020",
-    badgeImage: "/badges/aws-sysops.png",
+    name: "WSQ Data Science",
+    issuer: "Vertical Institute",
+    year: "2025",
+    badgeImage: "/badges/vertical-institute-logo.svg",
+    badgeIsLogo: true,
   },
   {
     name: "Microsoft Certified Solutions Expert",
     issuer: "Microsoft · MCSE 2016",
     year: "2020",
     badgeImage: "/badges/mcse.png",
+  },
+  {
+    name: "AWS Certified SysOps Administrator — Associate",
+    issuer: "Amazon Web Services",
+    year: "2020",
+    badgeImage: "/badges/aws-sysops.png",
   },
   {
     name: "Microsoft Certified Solutions Associate",
@@ -36,13 +49,6 @@ const certs = [
     issuer: "AXELOS",
     year: "2013",
     badgeImage: "/badges/itil-foundation.png",
-  },
-  {
-    name: "WSQ Data Science",
-    issuer: "Vertical Institute",
-    year: "2025",
-    badgeImage: "/badges/vertical-institute-logo.svg",
-    badgeIsLogo: true,
   },
 ];
 
