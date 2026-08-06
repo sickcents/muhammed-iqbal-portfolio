@@ -2,6 +2,12 @@ import Image from "next/image";
 
 const certs = [
   {
+    name: "GitHub Foundations",
+    issuer: "Microsoft",
+    year: "2026",
+    badgeImage: "/badges/github-foundations-2026.png",
+  },
+  {
     name: "AWS Certified Cloud Practitioner",
     issuer: "Amazon Web Services",
     year: "2026",
@@ -92,7 +98,7 @@ export default function Certifications() {
           {certs.map((cert) => (
             <div
               key={cert.name}
-              className="bg-white border border-[#DDD8CC] rounded-2xl p-5 flex items-start gap-4"
+              className="h-full bg-white border border-[#DDD8CC] rounded-2xl p-5 flex items-start gap-4"
             >
               <div
                 className={`shrink-0 w-10 h-10 rounded-xl bg-[#FAF8F4] border border-[#DDD8CC] flex items-center justify-center overflow-hidden ${
