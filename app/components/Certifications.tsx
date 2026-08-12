@@ -59,21 +59,40 @@ const certs = [
 ];
 
 const otherCerts = [
-  { name: "Exam 744: Securing Windows Server 2016", badgeImage: "/badges/exam-744.png" },
-  { name: "MTA: Security Fundamentals", badgeImage: "/badges/mta-security-fundamentals.png" },
-  { name: "Exam 412: Configuring Advanced Windows Server 2012 Services", badgeImage: "/badges/exam-412.png" },
-  { name: "Exam 411: Administering Windows Server 2012", badgeImage: "/badges/exam-411.png" },
-  { name: "Exam 410: Installing and Configuring Windows Server 2012", badgeImage: "/badges/exam-410.png" },
+  {
+    name: "Exam 744: Securing Windows Server 2016",
+    badgeImage: "/badges/exam-744.png",
+  },
+  {
+    name: "MTA: Security Fundamentals",
+    badgeImage: "/badges/mta-security-fundamentals.png",
+  },
+  {
+    name: "Exam 412: Configuring Advanced Windows Server 2012 Services",
+    badgeImage: "/badges/exam-412.png",
+  },
+  {
+    name: "Exam 411: Administering Windows Server 2012",
+    badgeImage: "/badges/exam-411.png",
+  },
+  {
+    name: "Exam 410: Installing and Configuring Windows Server 2012",
+    badgeImage: "/badges/exam-410.png",
+  },
 ];
 
 const training = [
   "Amazon Machine Learning University (MLU) — Applied AI/ML, 2025–2026",
   "Microsoft Azure Administrator, 2020",
+  "DeepLearning.AI, Generative AI for Everyone (Andrrew Ng), 2024",
 ];
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="py-24 px-6 border-t border-[#DDD8CC]">
+    <section
+      id="certifications"
+      className="py-24 px-6 border-t border-[#DDD8CC]"
+    >
       <div className="max-w-5xl mx-auto">
         <div className="flex items-end justify-between flex-wrap gap-3 mb-14">
           <div>
@@ -90,7 +109,8 @@ export default function Certifications() {
             rel="noopener noreferrer"
             className="text-sm font-medium text-[#0F8A72] hover:text-[#0B6B58] underline underline-offset-4"
           >
-            View verified badges on Credly <span className="text-[#E2672A]">↗</span>
+            View verified badges on Credly{" "}
+            <span className="text-[#E2672A]">↗</span>
           </a>
         </div>
 
@@ -120,7 +140,11 @@ export default function Certifications() {
                     alt={`${cert.issuer} badge`}
                     width={40}
                     height={40}
-                    className={cert.badgeIsLogo ? "object-contain" : "object-cover w-full h-full"}
+                    className={
+                      cert.badgeIsLogo
+                        ? "object-contain"
+                        : "object-cover w-full h-full"
+                    }
                   />
                 )}
               </div>
@@ -128,7 +152,9 @@ export default function Certifications() {
                 <div className="font-semibold text-sm text-[#1A2E1A] leading-tight">
                   {cert.name}
                 </div>
-                <div className="text-xs text-[#556B55] mt-0.5">{cert.issuer}</div>
+                <div className="text-xs text-[#556B55] mt-0.5">
+                  {cert.issuer}
+                </div>
                 {cert.year && (
                   <div className="text-xs text-[#14B8A6] mt-1 font-medium">
                     {cert.year}
@@ -163,15 +189,21 @@ export default function Certifications() {
             ))}
           </div>
           <span className="text-sm font-medium text-[#556B55] group-hover:text-[#0F8A72] transition-colors">
-            +{otherCerts.length} other certifications <span className="text-[#E2672A]">↗</span>
+            +{otherCerts.length} other certifications{" "}
+            <span className="text-[#E2672A]">↗</span>
           </span>
         </a>
 
         <div>
-          <h3 className="text-sm font-semibold text-[#1A2E1A] mb-4">Training</h3>
+          <h3 className="text-sm font-semibold text-[#1A2E1A] mb-4">
+            Training
+          </h3>
           <ul className="space-y-2">
             {training.map((t) => (
-              <li key={t} className="flex items-start gap-3 text-sm text-[#556B55]">
+              <li
+                key={t}
+                className="flex items-start gap-3 text-sm text-[#556B55]"
+              >
                 <span className="mt-2 shrink-0 w-1.5 h-1.5 rounded-full bg-[#E2672A]" />
                 {t}
               </li>
